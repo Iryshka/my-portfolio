@@ -1,0 +1,28 @@
+<svg width="129" height="128" viewBox="0 0 129 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="drive.block" clip-path="url(#clip0_18_73383)">
+<g id="drive.outline">
+<path d="M24.2 30H96.2V34H24.2V30Z" fill="black"/>
+<path d="M20.2 38V34H24.2V38H20.2Z" fill="black"/>
+<path d="M16.2 42V38H20.2V42H16.2Z" fill="black"/>
+<path d="M12.2 46V42H16.2V46H12.2Z" fill="black"/>
+<path d="M8.19995 50V46H12.2V50H8.19995Z" fill="black"/>
+<path d="M4.19995 54V50H8.19995V54H4.19995Z" fill="black"/>
+<path d="M16.2 70H24.2V82H16.2V70Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M116.2 54H120.2V66H124.2V74H128.2V98H4.19995V94H0.199951V54H4.19995V62H116.2V54ZM4.19995 90H116.2V66H4.19995V90Z" fill="black"/>
+<path d="M112.2 50H116.2V54H112.2V50Z" fill="black"/>
+<path d="M108.2 46H112.2V50H108.2V46Z" fill="black"/>
+<path d="M104.2 42H108.2V46H104.2V42Z" fill="black"/>
+<path d="M100.2 38H104.2V42H100.2V38Z" fill="black"/>
+<path d="M100.2 38V34H96.2V38H100.2Z" fill="black"/>
+</g>
+<g id="drive.fill">
+<path d="M24.2 34V38H20.2V42H16.2V46H12.2V50H8.19995V54H4.19995V62H116.2V54H112.2V50H108.2V46H104.2V42H100.2V38H96.2V34H24.2Z" fill="#4D7BFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4.19995 66H116.2V90H4.19995V66ZM24.2 82H16.2V70H24.2V82Z" fill="#4D7BFF"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_18_73383">
+<rect width="128" height="128" fill="white" transform="translate(0.199951)"/>
+</clipPath>
+</defs>
+</svg>

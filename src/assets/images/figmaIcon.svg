@@ -1,0 +1,9 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon.ico">
+<g id="Icon">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M18 0V1H19V2H20V6H19V7H18V2H13V7H18V9H20V14H19V15H18V16H14V15H13V21H12V22H11V23H6V21H10V20H11V16H6V14H11V9H6V7H11V2H6V7H5V6H4V2H5V1H6V0H18ZM14 9H17V10H18V13H17V14H13V10H14V9Z" fill="black"/>
+<path d="M6 9H4V14H6V9Z" fill="black"/>
+<path d="M6 16V21H4V17H5V16H6Z" fill="black"/>
+</g>
+</g>
+</svg>

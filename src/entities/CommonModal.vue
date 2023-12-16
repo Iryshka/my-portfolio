@@ -1,5 +1,15 @@
 <template>
-  <div>i'm a common modal:)</div>
+  <div>
+    i'm a common modal:)
+    <Svg name="whiteFolder" class="icon" />
+  </div>
 </template>
-<script></script>
-<style scoped lang="scss"></style>
+
+<script setup>
+import Svg from '@/components/icons/commonIcons.vue'
+</script>
+
+<style scoped lang="scss">
+.icon {
+}
+</style>
