@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <symbol id="twitter" viewBox="0 0 25 24">
+        <g id="icon.ico">
+            <path id="Icon" fill-rule="evenodd" clip-rule="evenodd" d="M19.2 2H14.2V3H13.2V4V5H12.2V6H11.2V7H12.2V8H9.2V7H6.2V6H4.2V5H3.2V4H2.2V3H1.2V4V5V6V7V8H2.2V9H3.2V10H1.2V11V12H2.2V13H4.2V14H2.2V15H4.2V16H5.2V17H7.2V18H5.2V19H0.199997V20H2.2V21H5.2V22H10.2V21H13.2V20H15.2V19H16.2V18H17.2V17H18.2V16H19.2V15H20.2V14V13H21.2V12V11V10H22.2V9V8V7V6H23.2V5H24.2V4H23.2V3H24.2V2H22.2V3H21.2V4H20.2V3H19.2V2ZM23.2 4V5H22.2V4H23.2Z" fill="black"/>
+        </g>
+    </symbol>
+
+    <symbol id="yellowDriver" viewBox="0 0 129 128">
+        <g id="drive.block" clip-path="url(#clip0_18_73393)">
+            <g id="drive.outline">
+                <path d="M24.6001 30H96.6001V34H24.6001V30Z" fill="black"/>
+                <path d="M20.6001 38V34H24.6001V38H20.6001Z" fill="black"/>
+                <path d="M16.6001 42V38H20.6001V42H16.6001Z" fill="black"/>
+                <path d="M12.6001 46V42H16.6001V46H12.6001Z" fill="black"/>
+                <path d="M8.6001 50V46H12.6001V50H8.6001Z" fill="black"/>
+                <path d="M4.6001 54V50H8.6001V54H4.6001Z" fill="black"/>
+                <path d="M16.6001 70H24.6001V82H16.6001V70Z" fill="black"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M116.6 54H120.6V66H124.6V74H128.6V98H4.6001V94H0.600098V54H4.6001V62H116.6V54ZM4.6001 90H116.6V66H4.6001V90Z" fill="black"/>
+                <path d="M112.6 50H116.6V54H112.6V50Z" fill="black"/>
+                <path d="M108.6 46H112.6V50H108.6V46Z" fill="black"/>
+                <path d="M104.6 42H108.6V46H104.6V42Z" fill="black"/>
+                <path d="M100.6 38H104.6V42H100.6V38Z" fill="black"/>
+                <path d="M100.6 38V34H96.6001V38H100.6Z" fill="black"/>
+            </g>
+            <g id="drive.fill">
+                <path d="M24.6001 34V38H20.6001V42H16.6001V46H12.6001V50H8.6001V54H4.6001V62H116.6V54H112.6V50H108.6V46H104.6V42H100.6V38H96.6001V34H24.6001Z"      />
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.6001 66H116.6V90H4.6001V66ZM24.6001 82H16.6001V70H24.6001V82Z"  />
+            </g>
+        </g>
+    </symbol>
+
+
+</svg>
