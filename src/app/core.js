@@ -1,12 +1,7 @@
-import './styles/index.css  '
-
 import { createApp } from 'vue'
-
 import App from './index.vue'
-
-export const app = createApp(App)
-
-import './plugins'
-
-app.mount('#app')
 debugger
+
+const app = createApp(App)
+
+export default app

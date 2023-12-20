@@ -1,3 +1,3 @@
-import { createPinia } from 'pinia'
+import app from '../../core.js'
 
-app.use(createPinia())
+debugger

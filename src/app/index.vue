@@ -1,7 +1,9 @@
 <script setup></script>
 
 <template>
-  <div>App component</div>
+  <div>
+    <router-view />
+  </div>
 </template>
 
 <style scoped></style>
