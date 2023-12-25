@@ -1,5 +1,5 @@
-import './core.js'
+import './core.js' //init vue instance
 
-import './plugins/router'
+import './plugins' //init plugins
 
-import './plugins/pinia'
+import './mount.js' // mount vue app

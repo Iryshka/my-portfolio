@@ -1,1 +1,2 @@
-console.log('hi')
+import './pinia'
+import './router'

@@ -1,3 +1,6 @@
-import app from '../../core.js'
+import { app } from '../../core.js'
+import { createPinia } from 'pinia'
 
-debugger
+const store = createPinia()
+
+app.use(store)
