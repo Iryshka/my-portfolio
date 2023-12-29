@@ -1,11 +1,12 @@
-// colors
 
-$red-regular: #FF5C5C;
-$blue-regular: #4D7BFF;
-$green-regular: #7FFF5B;
-$yellow-regular: #FFFF50;
-$magenta-regular: #FF90FF;
-$black-regular: #000000;
-$gray-regular: #4A4A49;
-$gray-light: #C4C4C4;
+:root {
+    --red-regular: #FF5C5C;
+    --blue-regular: #4D7BFF;
+    --green-regular: #7FFF5B;
+    --yellow-regular: #FFFF50;
+    --magenta-regular: #FF90FF;
+    --black-regular: #000000;
+    --gray-regular: #4A4A49;
+    --gray-light: #C4C4C4;
+}
 

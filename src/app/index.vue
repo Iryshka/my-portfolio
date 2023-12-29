@@ -1,15 +1,12 @@
-<script setup></script>
+<script setup>
+import DefaultLayout from '@/layouts/default/index.vue'
+</script>
 
-<!--<template>-->
-<!--  <div class="app">-->
-<!--    <router-view />-->
-<!--  </div>-->
-<!--</template>-->
 <template>
   <div class="app">
-    <window-layout>
+    <default-layout>
       <router-view />
-    </window-layout>
+    </default-layout>
   </div>
 </template>
 

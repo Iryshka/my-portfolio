@@ -1,11 +1,7 @@
 <template>
-  <div class="desktop">
-    <date-container />
-  </div>
+  <li v-for="(block, index) in 16" key="index">{{ index }}</li>
 </template>
-<script setup>
-import dateContainer from '@/entities/dateContainer.vue'
-</script>
+<script setup></script>
 <style scoped lang="scss">
 .desktop {
   display: flex;
