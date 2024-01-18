@@ -1,28 +1,19 @@
-<script setup></script>
-
 <template>
   <div class="innerwindow">
     <slot />
   </div>
 </template>
 
+<script setup></script>
+
 <style scoped lang="scss">
 .innerwindow {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  //grid-template-columns: repeat(auto-fill, 33px);
-  //grid-template-rows: repeat(auto-fill, 33px);
   width: 85%;
-  border-style: solid;
-  border-top-width: 10px;
-  border-right-width: 10px;
-  border-bottom-width: 10px;
-  border-left-width: 10px;
-  border-color: rgb(229, 78, 226);
+  border: 10px solid rgb(229, 78, 226);
   background-color: rgba(0, 0, 0, 80%);
   height: 90dvh;
+  font-size: 20px;
 
   .date {
     position: absolute;
