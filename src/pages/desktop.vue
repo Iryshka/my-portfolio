@@ -1,28 +1,52 @@
 <template>
-  <ul class="desktop-page" ref="desktopPage">
-    <li
-      class="block"
-      v-for="(block, index) in totalNumberOfBlocks"
-      @click="getBlockIndex(index)"
-      :key="index"
-      ref="block"
-    >
-      {{ index }}
-    </li>
-  </ul>
+  <div @click="closeSelectOutside" class="desktop-page">
+    <transition>
+      <right-click-select :coordinates="coordinates" v-if="coordinates.length" />
+    </transition>
+    <ul class="desktop-page__list" ref="desktopPage">
+      <li
+        class="block"
+        v-for="(block, index) in totalNumberOfBlocks"
+        @contextmenu.prevent="showSelect"
+        :key="index"
+        ref="block"
+      >
+        {{ index }}
+      </li>
+    </ul>
+  </div>
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
+import rightClickSelect from '@/shared/rightClickSelect.vue'
 
-const block = ref(null)
+// const block = ref(null)
 const desktopPage = ref(null)
 const numberOfBlocksInWidth = ref(0)
 const numberOfBlocksInHeight = ref(0)
 const totalNumberOfBlocks = ref(0)
+const coordinates = ref([])
 
 onMounted(() => {
   getNumberOfBlocks()
+  window.addEventListener('click', closeSelectOutside)
 })
+
+function showSelect(event) {
+  coordinates.value[0] = event.clientX
+  coordinates.value[1] = event.clientY
+  console.log(coordinates.value[0], coordinates.value[1])
+}
+
+function closeSelect() {
+  coordinates.value = []
+}
+
+function closeSelectOutside(event) {
+  if (event.target.classList.contains('block')) {
+    closeSelect()
+  }
+}
 
 function getNumberOfBlocks() {
   const width = desktopPage.value.offsetWidth
@@ -51,42 +75,6 @@ function getNumberOfBlocks() {
 
   totalNumberOfBlocks.value = numberOfBlocksInWidth.value * numberOfBlocksInHeight.value
 }
-
-// function getNumberOfBlocks() {
-//   const width = desktopPage.value.offsetWidth
-//   const height = desktopPage.value.offsetHeight
-//
-//   const blockSize = 70
-//   // количество блоков в ширину, в высоту
-//   numberOfBlocksInWidth.value = Math.floor(width / blockSize)
-//   numberOfBlocksInHeight.value = Math.floor(height / blockSize)
-//   console.log('Ширина', width)
-//   console.log('Высота', height)
-//   console.log('Mаксимальное количество блоков в ширину', numberOfBlocksInWidth.value)
-//   console.log('Mаксимальное количество блоков в высоту', numberOfBlocksInHeight.value)
-//
-//   const remainderWidth = width / blockSize - Math.trunc(width / blockSize)
-//   const remainderHeight = height / blockSize - Math.trunc(height / blockSize)
-//   console.log('Общий отступ блоков по горизонтали', remainderWidth)
-//   console.log('Общий отступ блоков по вертикали', remainderHeight)
-//
-//   // отступ между квадратами по горизонтали
-//   const horizontalSpaceBetweenBlocks = (numberOfBlocksInWidth.value - 1) / remainderWidth
-//   console.log('отступ между квадратами по горизонтали', horizontalSpaceBetweenBlocks)
-//
-//   const verticalSpaceBetweenBlocks = (numberOfBlocksInHeight.value - 1) / remainderHeight
-//   console.log('отступ между квадратами по вертикали', verticalSpaceBetweenBlocks)
-//
-//   desktopPage.value.style.columnGap = `${Math.trunc(horizontalSpaceBetweenBlocks)}px`
-//   desktopPage.value.style.columnRow = `${Math.trunc(verticalSpaceBetweenBlocks)}px`
-//
-//   totalNumberOfBlocks.value = numberOfBlocksInWidth.value * numberOfBlocksInHeight.value
-// }
-
-function getBlockIndex(index) {
-  block.value = index
-  console.log(index)
-}
 </script>
 
 <style scoped lang="scss">
@@ -101,7 +89,11 @@ function getBlockIndex(index) {
   font-size: 40px;
 
   &-page {
-    //background-color: #e210f1;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-page__list {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -111,7 +103,18 @@ function getBlockIndex(index) {
 
 .block {
   border: none;
+  opacity: 0;
   width: 70px;
   height: 70px;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
