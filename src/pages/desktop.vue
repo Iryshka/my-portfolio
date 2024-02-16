@@ -1,15 +1,20 @@
 <template>
-  <div @click="closeSelectOutside" class="desktop-page">
+  <div
+    ref="desktopPage"
+    @contextmenu.prevent="showSelect"
+    @click="closeSelect"
+    class="desktop-page"
+  >
     <transition>
-      <right-click-select :coordinates="coordinates" v-if="coordinates.length" />
+      <the-options :pageWidth="pageWidth" :coordinates="coordinates" v-if="coordinates.length" />
     </transition>
-    <ul class="desktop-page__list" ref="desktopPage">
+    <ul class="desktop-page__list">
       <li
+        @click="onBlock"
+        ref="grid"
         class="block"
         v-for="(block, index) in totalNumberOfBlocks"
-        @contextmenu.prevent="showSelect"
         :key="index"
-        ref="block"
       >
         {{ index }}
       </li>
@@ -18,38 +23,39 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import rightClickSelect from '@/shared/rightClickSelect.vue'
+import TheOptions from '@/shared/TheOptions.vue'
 
 // const block = ref(null)
+const grid = ref(null)
 const desktopPage = ref(null)
+
 const numberOfBlocksInWidth = ref(0)
 const numberOfBlocksInHeight = ref(0)
 const totalNumberOfBlocks = ref(0)
 const coordinates = ref([])
+const pageWidth = ref(0)
 
 onMounted(() => {
   getNumberOfBlocks()
-  window.addEventListener('click', closeSelectOutside)
+  pageWidth.value = desktopPage.value.offsetWidth
 })
+
+function onBlock(event) {
+  console.log(event.target)
+}
 
 function showSelect(event) {
   coordinates.value[0] = event.clientX
   coordinates.value[1] = event.clientY
-  console.log(coordinates.value[0], coordinates.value[1])
 }
 
 function closeSelect() {
   coordinates.value = []
 }
 
-function closeSelectOutside(event) {
-  if (event.target.classList.contains('block')) {
-    closeSelect()
-  }
-}
-
 function getNumberOfBlocks() {
   const width = desktopPage.value.offsetWidth
+
   const height = desktopPage.value.offsetHeight
 
   const blockSize = 70
