@@ -6,7 +6,7 @@
     class="desktop-page"
   >
     <transition>
-      <the-options :pageWidth="pageWidth" :coordinates="coordinates" v-if="coordinates.length" />
+      <the-options :coordinates="coordinates" v-if="coordinates.length" />
     </transition>
     <ul class="desktop-page__list">
       <li
@@ -22,7 +22,7 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import TheOptions from '@/shared/TheOptions.vue'
 
 // const block = ref(null)
@@ -34,6 +34,9 @@ const numberOfBlocksInHeight = ref(0)
 const totalNumberOfBlocks = ref(0)
 const coordinates = ref([])
 const pageWidth = ref(0)
+
+const horizontalSpaceBetweenBlocks = ref(0)
+const verticalSpaceBetweenBlocks = ref(0)
 
 onMounted(() => {
   getNumberOfBlocks()
@@ -71,19 +74,36 @@ function getNumberOfBlocks() {
   // Calculate the remainder space after placing blocks
   const remainderWidth = width - totalOccupiedWidth
   const remainderHeight = height - totalOccupiedHeight
+  console.log(remainderWidth)
 
   // Calculate the space between blocks
-  const horizontalSpaceBetweenBlocks = remainderWidth / (numberOfBlocksInWidth.value - 1)
-  const verticalSpaceBetweenBlocks = remainderHeight / (numberOfBlocksInHeight.value - 1)
+  horizontalSpaceBetweenBlocks.value = Math.floor(
+    remainderWidth / (numberOfBlocksInWidth.value - 1)
+  )
+  verticalSpaceBetweenBlocks.value = Math.floor(
+    remainderHeight / (numberOfBlocksInHeight.value - 1)
+  )
+  // const horizontalSpaceBetweenBlocks = remainderWidth / (numberOfBlocksInWidth.value - 1)
+  // const verticalSpaceBetweenBlocks = remainderHeight / (numberOfBlocksInHeight.value - 1)
 
-  desktopPage.value.style.columnGap = `${Math.floor(horizontalSpaceBetweenBlocks)}px`
-  desktopPage.value.style.rowGap = `${Math.floor(verticalSpaceBetweenBlocks)}px`
+  // desktopPage.value.style.columnGap = `${Math.floor(horizontalSpaceBetweenBlocks)}px`
+  // desktopPage.value.style.rowGap = `${Math.floor(verticalSpaceBetweenBlocks)}px`
 
   totalNumberOfBlocks.value = numberOfBlocksInWidth.value * numberOfBlocksInHeight.value
 }
+
+//Computed property to dynamically generate the styles for the .desktop-page__list
+// const gridGaps = computed(() => ({
+//   'row-gap': `${Math.floor(verticalSpaceBetweenBlocks.value)}px`,
+//   'column-gap': `${Math.floor(horizontalSpaceBetweenBlocks.value)}px`
+// }))
+const rowGap = computed(() => `${verticalSpaceBetweenBlocks.value}px`)
+const columnGap = computed(() => `${horizontalSpaceBetweenBlocks.value}px`)
 </script>
 
 <style scoped lang="scss">
+$rowGap: v-bind(rowGap);
+$columnGap: v-bind(columnGap);
 .desktop {
   display: flex;
   justify-content: center;
@@ -102,14 +122,17 @@ function getNumberOfBlocks() {
   &-page__list {
     display: flex;
     flex-wrap: wrap;
+    row-gap: $rowGap;
+    column-gap: $columnGap;
+    justify-content: space-between;
     width: 100%;
     height: 100%;
   }
 }
 
 .block {
-  border: none;
-  opacity: 0;
+  border: 1px solid pink;
+  opacity: 1;
   width: 70px;
   height: 70px;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div :style="styles" ref="select" @click.stop class="click-select">
+  <div :style="styles" @click.stop class="click-select">
     <div class="click-select__dots">
       <span class="click-select__dot"></span>
       <span class="click-select__dot"></span>
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { reactive } from 'vue'
 import TheNode from '@/shared/TheNode.vue'
 
 const props = defineProps({
@@ -26,18 +26,12 @@ const props = defineProps({
     type: Number
   }
 })
-onMounted(() => {
-  checkDirection()
-})
-
-function checkDirection() {}
 
 const styles = reactive({
   top: props.coordinates[1] + 'px',
   left: props.coordinates[0] + 'px'
 })
 
-console.log(styles)
 const options = reactive([
   {
     label: 'Create',
@@ -106,7 +100,6 @@ const options = reactive([
 
     &-item {
       font-size: 16px;
-      padding: 0 10px 0 10px;
       border-bottom: 2px solid black;
       cursor: pointer;
 

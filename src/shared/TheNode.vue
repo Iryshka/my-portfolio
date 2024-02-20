@@ -1,18 +1,26 @@
 <template>
-  <div @click="onNode" class="node">
+  <div @click="onNode" ref="node" class="node">
     <p class="node__label">{{ label }}</p>
-    <ul v-if="isList" class="node__list">
+    <ul
+      v-if="isList"
+      :class="[
+        direction === 'right' ? 'node__list node__list-right' : 'node__list node__list-left'
+      ]"
+    >
       <li v-for="option in parsedOptions" :key="option.label" class="node__item">
-        <the-node :label="option.label" :options="option.options" />
+        <the-node :label="option.label" :options="option.options" :direction="direction" />
       </li>
     </ul>
   </div>
 </template>
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const isOptionDisplayed = ref(false)
 const isList = computed(() => (parsedOptions.value.length ? isOptionDisplayed.value : true))
+const node = ref(null)
+const left = ref('0px')
+const right = ref('0px')
 
 // чтобы открывать ноду справа или слева надо в ноду передавать пропс direction.
 // От него будет рендериться нода справа или слева.
@@ -52,10 +60,29 @@ const props = defineProps({
 })
 const parsedOptions = computed(() => props.options ?? [])
 
-function onNode() {
+onMounted(() => {
+  checkDirection()
+})
+function checkDirection() {
+  const size = node.value.getBoundingClientRect()
+  left.value = -1 * Math.floor(size.left) + 'px'
+  right.value = -1 * Math.floor(size.right) + 'px'
+  const isSpaceEnough = window.innerWidth - Math.floor(size.right) + 240 > 0
+  console.log(window.innerWidth, Math.floor(size.right), isSpaceEnough)
+  console.log('size', size)
+
+  console.log('right', right.value, 'left', left.value)
+}
+
+function onNode(event) {
+  const clickX = event.clientX
+  // const clickY = event.clientY
+  const nodeWidth = 300
+  const widthToEnd = window.innerWidth - clickX - nodeWidth
+  console.log(widthToEnd)
+
   if (props.action) {
-    // console.log('click on action')
-    console.log(props.pageWidth)
+    console.log('click on action')
   } else {
     isOptionDisplayed.value = !isOptionDisplayed.value
   }
@@ -63,12 +90,36 @@ function onNode() {
 </script>
 
 <style scoped lang="scss">
+$left: v-bind(left);
+$right: v-bind(right);
+
 .node__list {
+  position: relative;
   width: 100%;
   background-color: red;
+  padding: 0 10px;
+
+  &::after {
+    content: '';
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    position: absolute;
+    left: $left;
+  }
+
+  &::before {
+    content: '';
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    position: absolute;
+    right: $right;
+  }
 
   &-right {
-    right: 100%;
+    left: 100%;
+    background-color: blue;
     position: absolute;
     top: 0;
   }
