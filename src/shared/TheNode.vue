@@ -3,9 +3,8 @@
     <p class="node__label">{{ label }}</p>
     <ul
       v-if="isList"
-      :class="[
-        direction === 'right' ? 'node__list node__list-right' : 'node__list node__list-left'
-      ]"
+      class="node__list"
+      :class="[rightOrLeft === 'right' ? 'node__list-right' : 'node__list-left']"
     >
       <li v-for="option in parsedOptions" :key="option.label" class="node__item">
         <the-node :label="option.label" :options="option.options" :direction="direction" />
@@ -14,13 +13,15 @@
   </div>
 </template>
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, defineComponent } from 'vue'
 
 const isOptionDisplayed = ref(false)
 const isList = computed(() => (parsedOptions.value.length ? isOptionDisplayed.value : true))
 const node = ref(null)
-const left = ref('0px')
-const right = ref('0px')
+const rightOrLeft = ref('right')
+
+// const left = ref('0px')
+// const right = ref('0px')
 
 // чтобы открывать ноду справа или слева надо в ноду передавать пропс direction.
 // От него будет рендериться нода справа или слева.
@@ -36,7 +37,7 @@ const right = ref('0px')
 // (Разница между этими величинами 1,2 должна быть >= 300 px (нужно ли добавлять ширину опций?))
 // 4.
 
-defineOptions({
+defineComponent({
   name: 'TheNode'
 })
 const props = defineProps({
@@ -50,9 +51,6 @@ const props = defineProps({
   action: {
     type: Function
   },
-  pageWidth: {
-    type: Number
-  },
   direction: {
     type: String,
     validator: (value) => ['right', 'left'].includes(value)
@@ -61,26 +59,16 @@ const props = defineProps({
 const parsedOptions = computed(() => props.options ?? [])
 
 onMounted(() => {
-  checkDirection()
+  rightOrLeft.value = checkDirection()
 })
 function checkDirection() {
   const size = node.value.getBoundingClientRect()
-  left.value = -1 * Math.floor(size.left) + 'px'
-  right.value = -1 * Math.floor(size.right) + 'px'
-  const isSpaceEnough = window.innerWidth - Math.floor(size.right) + 240 > 0
-  console.log(window.innerWidth, Math.floor(size.right), isSpaceEnough)
-  console.log('size', size)
+  const isSpaceEnough = window.innerWidth - Math.floor(size.right)
 
-  console.log('right', right.value, 'left', left.value)
+  return isSpaceEnough >= 220 ? 'right' : 'left'
 }
 
-function onNode(event) {
-  const clickX = event.clientX
-  // const clickY = event.clientY
-  const nodeWidth = 300
-  const widthToEnd = window.innerWidth - clickX - nodeWidth
-  console.log(widthToEnd)
-
+function onNode() {
   if (props.action) {
     console.log('click on action')
   } else {
@@ -90,44 +78,24 @@ function onNode(event) {
 </script>
 
 <style scoped lang="scss">
-$left: v-bind(left);
-$right: v-bind(right);
-
 .node__list {
   position: relative;
   width: 100%;
   background-color: red;
   padding: 0 10px;
 
-  &::after {
-    content: '';
-    width: 50px;
-    height: 50px;
-    background-color: red;
-    position: absolute;
-    left: $left;
-  }
-
-  &::before {
-    content: '';
-    width: 50px;
-    height: 50px;
-    background-color: green;
-    position: absolute;
-    right: $right;
-  }
-
   &-right {
     left: 100%;
-    background-color: blue;
+    background-color: pink;
     position: absolute;
     top: 0;
   }
 
   &-left {
-    left: 100%;
+    right: 100%;
     position: absolute;
     top: 0;
+    background-color: yellow;
   }
 }
 </style>

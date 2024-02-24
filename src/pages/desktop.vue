@@ -83,11 +83,6 @@ function getNumberOfBlocks() {
   verticalSpaceBetweenBlocks.value = Math.floor(
     remainderHeight / (numberOfBlocksInHeight.value - 1)
   )
-  // const horizontalSpaceBetweenBlocks = remainderWidth / (numberOfBlocksInWidth.value - 1)
-  // const verticalSpaceBetweenBlocks = remainderHeight / (numberOfBlocksInHeight.value - 1)
-
-  // desktopPage.value.style.columnGap = `${Math.floor(horizontalSpaceBetweenBlocks)}px`
-  // desktopPage.value.style.rowGap = `${Math.floor(verticalSpaceBetweenBlocks)}px`
 
   totalNumberOfBlocks.value = numberOfBlocksInWidth.value * numberOfBlocksInHeight.value
 }
