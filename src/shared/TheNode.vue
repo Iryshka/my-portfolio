@@ -1,11 +1,7 @@
 <template>
-  <div @click="onNode" ref="node" class="node">
+  <div @click.stop="onNode" ref="node" class="node">
     <p class="node__label">{{ label }}</p>
-    <ul
-      v-if="isList"
-      class="node__list"
-      :class="[rightOrLeft === 'right' ? 'node__list-right' : 'node__list-left']"
-    >
+    <ul v-if="isList" :class="['node__list', direction]">
       <li v-for="option in parsedOptions" :key="option.label" class="node__item">
         <the-node :label="option.label" :options="option.options" :direction="direction" />
       </li>
@@ -18,10 +14,7 @@ import { ref, computed, onMounted, defineComponent } from 'vue'
 const isOptionDisplayed = ref(false)
 const isList = computed(() => (parsedOptions.value.length ? isOptionDisplayed.value : true))
 const node = ref(null)
-const rightOrLeft = ref('right')
-
-// const left = ref('0px')
-// const right = ref('0px')
+const direction = ref('right')
 
 // чтобы открывать ноду справа или слева надо в ноду передавать пропс direction.
 // От него будет рендериться нода справа или слева.
@@ -37,6 +30,11 @@ const rightOrLeft = ref('right')
 // (Разница между этими величинами 1,2 должна быть >= 300 px (нужно ли добавлять ширину опций?))
 // 4.
 
+//В зависимости от направления вставлять шеврон.
+// Если нода содержит список, подставляем треуголтник.
+// Если вправо, вправо и наоборот.
+// При выборе конечной ноды, закрыть все списки. emits. Вернуть объект, на котором произошел клик.
+
 defineComponent({
   name: 'TheNode'
 })
@@ -50,22 +48,21 @@ const props = defineProps({
   },
   action: {
     type: Function
-  },
-  direction: {
-    type: String,
-    validator: (value) => ['right', 'left'].includes(value)
   }
+  // direction: {
+  //   type: String,
+  //   validator: (value) => ['right', 'left'].includes(value)
+  // }
 })
 const parsedOptions = computed(() => props.options ?? [])
 
 onMounted(() => {
-  rightOrLeft.value = checkDirection()
+  setDirection()
 })
-function checkDirection() {
+function setDirection() {
   const size = node.value.getBoundingClientRect()
   const isSpaceEnough = window.innerWidth - Math.floor(size.right)
-
-  return isSpaceEnough >= 220 ? 'right' : 'left'
+  direction.value = isSpaceEnough >= 220 ? 'right' : 'left'
 }
 
 function onNode() {
@@ -78,24 +75,26 @@ function onNode() {
 </script>
 
 <style scoped lang="scss">
-.node__list {
+.node {
   position: relative;
-  width: 100%;
-  background-color: red;
-  padding: 0 10px;
+  &__list {
+    width: 100%;
+    background-color: red;
+    padding: 0 10px;
 
-  &-right {
-    left: 100%;
-    background-color: pink;
-    position: absolute;
-    top: 0;
-  }
+    &.right {
+      left: 100%;
+      background-color: pink;
+      position: absolute;
+      top: 0;
+    }
 
-  &-left {
-    right: 100%;
-    position: absolute;
-    top: 0;
-    background-color: yellow;
+    &.left {
+      right: 100%;
+      position: absolute;
+      top: 0;
+      background-color: yellow;
+    }
   }
 }
 </style>

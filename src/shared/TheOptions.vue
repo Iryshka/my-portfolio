@@ -32,12 +32,17 @@ const styles = reactive({
   left: props.coordinates[0] + 'px'
 })
 
+console.log(props.coordinates[0], props.coordinates[1])
+
 const options = reactive([
   {
     label: 'Create',
     options: [
       {
-        label: 'Document',
+        label: 'Document'
+      },
+      {
+        label: 'Folder',
         options: [
           {
             label: 'txt'
@@ -46,9 +51,6 @@ const options = reactive([
             label: 'pdf'
           }
         ]
-      },
-      {
-        label: 'Folder'
       }
     ]
   },
