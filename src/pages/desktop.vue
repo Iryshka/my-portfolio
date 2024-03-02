@@ -22,7 +22,7 @@
   </div>
 </template>
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import TheOptions from '@/shared/TheOptions.vue'
 
 // const block = ref(null)
@@ -32,12 +32,17 @@ const desktopPage = ref(null)
 const numberOfBlocksInWidth = ref(0)
 const numberOfBlocksInHeight = ref(0)
 const totalNumberOfBlocks = ref(0)
-const coordinates = ref([])
+const coordinates = reactive([])
 const pageWidth = ref(0)
 const options = ref(null)
 
 const horizontalSpaceBetweenBlocks = ref(0)
 const verticalSpaceBetweenBlocks = ref(0)
+
+const MENU_WIDTH = 250
+const MENU_HEIGHT = 260
+const windowWidth = window.innerWidth
+const windowHeight = window.innerHeight
 
 onMounted(() => {
   getNumberOfBlocks()
@@ -49,31 +54,29 @@ function onBlock(event) {
 }
 
 function showSelect(event) {
-  coordinates.value[0] = event.clientX
-  coordinates.value[1] = event.clientY
+  coordinates[0] = event.clientX
+  coordinates[1] = event.clientY
+  // coordinates.value = [event.clientX, event.clientY]
 
   console.log(
     "i'm X",
-    coordinates.value[0],
+    coordinates[0],
     "i'm Y",
-    coordinates.value[1],
+    coordinates[1],
     "i'm window height",
     window.innerHeight
   )
-  const menuWidth = 250
-  const menuHeight = 260
-  const windowWidth = window.innerWidth
-  const windowHeight = window.innerHeight
-  const menuTop = coordinates.value[1]
-  const menuLeft = coordinates.value[0]
+
+  const isNeedStickOptionsToRight = windowWidth < coordinates[0] + MENU_WIDTH
+  const isNeedStickOptionsToBottom = windowHeight < coordinates[1] + MENU_HEIGHT
 
   // Check if there's less than 250px space to the right of the menu
-  if (windowWidth < menuLeft + menuWidth) {
-    coordinates.value[0] = windowWidth - menuWidth
+  if (isNeedStickOptionsToRight) {
+    coordinates[0] = windowWidth - MENU_WIDTH
   }
   // Check if there's less than 260px space to the bottom of the menu
-  if (windowHeight < menuTop + menuHeight) {
-    coordinates.value[1] = windowHeight - menuHeight
+  if (isNeedStickOptionsToBottom) {
+    coordinates[1] = windowHeight - MENU_HEIGHT
   }
 }
 
