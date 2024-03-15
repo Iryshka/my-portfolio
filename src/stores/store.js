@@ -1,16 +1,8 @@
 import { defineStore } from 'pinia'
 
-export const usePageSizesStore = defineStore('pageSizes', {
+export const useFilesStore = defineStore('files', {
   state: () => ({
-    pageWidth: 0,
-    screenWidth: 0
+    files: {}
   }),
-  actions: {
-    setPageWidth(width) {
-      this.pageWidth = width
-    },
-    setScreenWidth(width) {
-      this.screenWidth = width
-    }
-  }
+  actions: {}
 })

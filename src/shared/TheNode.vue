@@ -1,34 +1,40 @@
 <template>
   <div @click.stop="onNode" ref="node" class="node">
-    <p class="node__label">{{ label }}</p>
-    <ul v-if="isList" :class="['node__list', direction]">
+    <div class="node__wrapper">
+      <p class="node__label">{{ label }}</p>
+      <img
+        class="node__img node__img-left"
+        v-show="props.options && direction === 'left'"
+        src="../assets/images/leftarrow.svg"
+        alt=""
+      />
+      <img
+        class="node__img node__img-right"
+        v-show="props.options && direction === 'right'"
+        src="../assets/images/rightarrow.svg"
+        alt=""
+      />
+    </div>
+    <ul v-if="isOptionDisplayed" :class="['node__list', direction]">
       <li v-for="option in parsedOptions" :key="option.label" class="node__item">
-        <the-node :label="option.label" :options="option.options" :direction="direction" />
+        <the-node
+          @action="$emit('action')"
+          :label="option.label"
+          :options="option.options"
+          :direction="direction"
+          :action="option.action"
+        />
       </li>
     </ul>
   </div>
 </template>
 <script setup>
-import { ref, computed, onMounted, defineComponent } from 'vue'
+import { ref, computed, onMounted, defineComponent, defineEmits } from 'vue'
 
 const isOptionDisplayed = ref(false)
-const isList = computed(() => (parsedOptions.value.length ? isOptionDisplayed.value : true))
+
 const node = ref(null)
 const direction = ref('right')
-
-// чтобы открывать ноду справа или слева надо в ноду передавать пропс direction.
-// От него будет рендериться нода справа или слева.
-// 1. создать пропс direction в TheNode
-// 2. на хук onMounted повесить функцию вычисления direction. Direction передаем пропсом.
-// 3. В функции по умолчанию проверяем можем ли мы открыть в правую сторону. еСТЬ ЛИ У НАС МЕСТО ДЛЯ НОВОЙ НОДЫ.
-// 4. Если места нет, возвращаем left
-
-// Разработка функции.
-// 1. Высчитываем расстояние от правой границы ноды до правой границы нашей всей страницы.
-// 2. расстояние от правой границы нашей всей страницы до правой границы розового окна.
-// 3. Высчитать разницу между этими величинами.
-// (Разница между этими величинами 1,2 должна быть >= 300 px (нужно ли добавлять ширину опций?))
-// 4.
 
 //В зависимости от направления вставлять шеврон.
 // Если нода содержит список, подставляем треуголтник.
@@ -49,24 +55,26 @@ const props = defineProps({
   action: {
     type: Function
   }
-  // direction: {
-  //   type: String,
-  //   validator: (value) => ['right', 'left'].includes(value)
-  // }
 })
 const parsedOptions = computed(() => props.options ?? [])
 
 onMounted(() => {
   setDirection()
 })
+
+const emit = defineEmits(['action'])
+
 function setDirection() {
   const size = node.value.getBoundingClientRect()
   const isSpaceEnough = window.innerWidth - Math.floor(size.right)
   direction.value = isSpaceEnough >= 220 ? 'right' : 'left'
+  console.log(direction)
 }
 
 function onNode() {
+  console.log('onNode', props)
   if (props.action) {
+    emit('action')
     console.log('click on action')
   } else {
     isOptionDisplayed.value = !isOptionDisplayed.value
@@ -77,24 +85,45 @@ function onNode() {
 <style scoped lang="scss">
 .node {
   position: relative;
+
   &__list {
     width: 100%;
-    background-color: red;
-    padding: 0 10px;
+    border: 5px solid #ff90ff;
 
     &.right {
       left: 100%;
-      background-color: pink;
+      background-color: white;
       position: absolute;
       top: 0;
+      z-index: 1;
     }
 
     &.left {
       right: 100%;
       position: absolute;
       top: 0;
-      background-color: yellow;
+      background-color: white;
     }
+  }
+
+  &__item {
+    border-bottom: 2px solid black;
+
+    &:hover {
+      background-color: rgb(229, 78, 226, 0.2);
+    }
+  }
+  &__wrapper {
+    display: flex;
+    padding: 0 7px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__img {
+    //display: block;
+    width: 20px;
+    height: 20px;
   }
 }
 </style>

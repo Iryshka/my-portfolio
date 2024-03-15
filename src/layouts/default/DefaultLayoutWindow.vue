@@ -11,7 +11,8 @@
   position: relative;
   width: 85%;
   border: 10px solid rgb(229, 78, 226);
-  background-color: rgba(0, 0, 0, 80%);
+  //background-color: rgba(0, 0, 0, 80%);
+  background-color: #5efc8d;
   height: 90dvh;
   font-size: 20px;
 

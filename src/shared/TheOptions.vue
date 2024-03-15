@@ -8,14 +8,19 @@
 
     <ul class="click-select__list">
       <li v-for="option in options" :key="option.label" class="click-select__list-item">
-        <the-node :label="option.label" :options="option.options" :action="option.action" />
+        <the-node
+          @action="$emit('action')"
+          :label="option.label"
+          :options="option.options"
+          :action="option.action"
+        />
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { defineEmits, reactive } from 'vue'
 import TheNode from '@/shared/TheNode.vue'
 
 const props = defineProps({
@@ -34,23 +39,28 @@ const styles = reactive({
 
 console.log(props.coordinates[0], props.coordinates[1])
 
+defineEmits(['action'])
+
+// TODO: вынести options в desktop
 const options = reactive([
   {
     label: 'Create',
     options: [
       {
-        label: 'Document'
-      },
-      {
-        label: 'Folder',
+        label: 'Document',
         options: [
           {
-            label: 'txt'
+            label: 'txt',
+            action: () => console.log('create txt file')
           },
           {
-            label: 'pdf'
+            label: 'pdf',
+            action: () => console.log('create pdf file')
           }
         ]
+      },
+      {
+        label: 'Folder'
       }
     ]
   },
@@ -77,8 +87,8 @@ const options = reactive([
   border: 5px solid rgb(229, 78, 226);
   border-top-width: 30px;
   background-color: white;
-  width: 250px;
-  height: 260px;
+  width: 210px;
+  height: 240px;
 
   &__dots {
     width: 100%;
@@ -105,26 +115,10 @@ const options = reactive([
       border-bottom: 2px solid black;
       cursor: pointer;
 
-      &::before {
-        content: '\01F892';
-        position: absolute;
-        right: 8px;
-        font-size: 36px;
-      }
-
       &:hover {
         background-color: rgb(229, 78, 226, 0.2);
       }
     }
   }
-
-  //&__sublist {
-  //  z-index: 3;
-  //  background-color: red;
-  //  width: 300px;
-  //  position: absolute;
-  //  top: 0;
-  //  left: 100%;
-  //}
 }
 </style>

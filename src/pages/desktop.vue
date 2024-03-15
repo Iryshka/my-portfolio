@@ -1,29 +1,49 @@
 <template>
-  <div
-    ref="desktopPage"
-    @contextmenu.prevent="showSelect"
-    @click="closeSelect"
-    class="desktop-page"
-  >
+  <div ref="desktopPage" @contextmenu.prevent="showSelect" class="desktop-page">
     <transition>
-      <the-options ref="options" :coordinates="coordinates" v-if="coordinates.length" />
+      <the-options
+        @action="closeSelect"
+        ref="options"
+        :coordinates="coordinates"
+        v-if="isOptionsDisplayed"
+      />
     </transition>
     <ul class="desktop-page__list">
       <li
-        @click="onBlock"
+        @contextmenu.prevent="onBlock(index)"
         ref="grid"
         class="block"
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
       >
+        <!--        <File />-->
         {{ index }}
       </li>
     </ul>
+    <!--    <File class="desktop-page__file" v-if="isFileCreated" />-->
+    <File
+      @click="deleteFile(file.id)"
+      :id="file.id"
+      class="desktop-page__file"
+      v-for="(file, index) in files"
+      :key="index"
+      :style="{ left: file.position.left, top: file.position.top }"
+    />
   </div>
 </template>
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
 import TheOptions from '@/shared/TheOptions.vue'
+import File from '@/shared/IconItem/File.vue'
+//TODO: ПРИВЕСТИ В порядок компонент theOptions.
+// Удолить лишнее
+// Почистить комменты
+// Options принимает в себя пропс
+// Сделать отдельную репу для компонента. Выложить его отдельно
+
+// Ынести options в desktop
+//У ноды должен быть треугольник
+// в эмит передаем action
 
 // const block = ref(null)
 const grid = ref(null)
@@ -33,39 +53,36 @@ const numberOfBlocksInWidth = ref(0)
 const numberOfBlocksInHeight = ref(0)
 const totalNumberOfBlocks = ref(0)
 const coordinates = reactive([])
+const isOptionsDisplayed = ref(false)
 const pageWidth = ref(0)
 const options = ref(null)
+// const isFileCreated = ref(false)
 
 const horizontalSpaceBetweenBlocks = ref(0)
 const verticalSpaceBetweenBlocks = ref(0)
 
-const MENU_WIDTH = 250
-const MENU_HEIGHT = 260
+const MENU_WIDTH = 210
+const MENU_HEIGHT = 240
 const windowWidth = window.innerWidth
 const windowHeight = window.innerHeight
+
+let files = reactive([])
+let fileCreated = 0
+
+const chosenTagIndex = ref(null)
 
 onMounted(() => {
   getNumberOfBlocks()
   pageWidth.value = desktopPage.value.offsetWidth
 })
 
-function onBlock(event) {
-  console.log(event.target)
+function onBlock(index) {
+  chosenTagIndex.value = index
 }
 
 function showSelect(event) {
   coordinates[0] = event.clientX
   coordinates[1] = event.clientY
-  // coordinates.value = [event.clientX, event.clientY]
-
-  console.log(
-    "i'm X",
-    coordinates[0],
-    "i'm Y",
-    coordinates[1],
-    "i'm window height",
-    window.innerHeight
-  )
 
   const isNeedStickOptionsToRight = windowWidth < coordinates[0] + MENU_WIDTH
   const isNeedStickOptionsToBottom = windowHeight < coordinates[1] + MENU_HEIGHT
@@ -78,12 +95,26 @@ function showSelect(event) {
   if (isNeedStickOptionsToBottom) {
     coordinates[1] = windowHeight - MENU_HEIGHT
   }
+  isOptionsDisplayed.value = true
+}
+
+function createFile(position) {
+  fileCreated++
+  const id = fileCreated
+  files.push({ position, id })
+  console.log(files)
+}
+
+function deleteFile(id) {
+  const fileIndex = files.findIndex((file) => file.id === id)
+  files.splice(fileIndex, 1)
 }
 
 function closeSelect() {
-  coordinates.value = []
+  isOptionsDisplayed.value = false
+  createFile({ left: `${coordinates[0]}px`, top: `${coordinates[1]}px` })
+  // chosenTagIndex.value = null
 }
-
 function getNumberOfBlocks() {
   const width = desktopPage.value.offsetWidth
 
@@ -114,11 +145,8 @@ function getNumberOfBlocks() {
   totalNumberOfBlocks.value = numberOfBlocksInWidth.value * numberOfBlocksInHeight.value
 }
 
-//Computed property to dynamically generate the styles for the .desktop-page__list
-// const gridGaps = computed(() => ({
-//   'row-gap': `${Math.floor(verticalSpaceBetweenBlocks.value)}px`,
-//   'column-gap': `${Math.floor(horizontalSpaceBetweenBlocks.value)}px`
-// }))
+// const leftCoord = computed(() => `${coordinates[0]}px`)
+// const topCoord = computed(() => `${coordinates[1]}px`)
 const rowGap = computed(() => `${verticalSpaceBetweenBlocks.value}px`)
 const columnGap = computed(() => `${horizontalSpaceBetweenBlocks.value}px`)
 </script>
@@ -126,6 +154,10 @@ const columnGap = computed(() => `${horizontalSpaceBetweenBlocks.value}px`)
 <style scoped lang="scss">
 $rowGap: v-bind(rowGap);
 $columnGap: v-bind(columnGap);
+
+$topCoord: v-bind(topCoord);
+$leftCoord: v-bind(leftCoord);
+
 .desktop {
   display: flex;
   justify-content: center;
@@ -149,6 +181,12 @@ $columnGap: v-bind(columnGap);
     justify-content: space-between;
     width: 100%;
     height: 100%;
+  }
+
+  &-page__file {
+    position: absolute;
+    //top: $topCoord;
+    //left: $leftCoord;
   }
 }
 
