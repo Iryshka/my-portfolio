@@ -15,9 +15,10 @@
         alt=""
       />
     </div>
-    <ul v-if="isOptionDisplayed" :class="['node__list', direction]">
+    <ul v-if="isOptionDisplayed" :class="[direction, { node__list: parsedOptions.length }]">
       <li v-for="option in parsedOptions" :key="option.label" class="node__item">
         <the-node
+          ref="select"
           @action="$emit('action')"
           :label="option.label"
           :options="option.options"
@@ -35,11 +36,6 @@ const isOptionDisplayed = ref(false)
 
 const node = ref(null)
 const direction = ref('right')
-
-//В зависимости от направления вставлять шеврон.
-// Если нода содержит список, подставляем треуголтник.
-// Если вправо, вправо и наоборот.
-// При выборе конечной ноды, закрыть все списки. emits. Вернуть объект, на котором произошел клик.
 
 defineComponent({
   name: 'TheNode'
@@ -65,9 +61,13 @@ onMounted(() => {
 const emit = defineEmits(['action'])
 
 function setDirection() {
+  // const size = node.value.getBoundingClientRect()
+  // const isSpaceEnough = Math.floor(size.left)
+  // direction.value = isSpaceEnough >= 220 ? 'left' : 'right'
   const size = node.value.getBoundingClientRect()
-  const isSpaceEnough = window.innerWidth - Math.floor(size.right)
-  direction.value = isSpaceEnough >= 220 ? 'right' : 'left'
+  const isSpaceEnough = window.innerWidth - Math.floor(size.left)
+  const spaceNeeded = 210 * parsedOptions.value.length
+  direction.value = isSpaceEnough >= spaceNeeded ? 'right' : 'left'
   console.log(direction)
 }
 
@@ -88,7 +88,7 @@ function onNode() {
 
   &__list {
     width: 100%;
-    border: 5px solid #ff90ff;
+    border: 5px solid rgb(229, 78, 226);
 
     &.right {
       left: 100%;

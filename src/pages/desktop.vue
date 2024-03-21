@@ -1,8 +1,8 @@
 <template>
-  <div ref="desktopPage" @contextmenu.prevent="showSelect" class="desktop-page">
+  <div ref="desktopPage" @contextmenu.prevent.stop="showSelect" class="desktop-page">
     <transition>
       <the-options
-        @action="closeSelect"
+        @action="onOption"
         ref="options"
         :coordinates="coordinates"
         v-if="isOptionsDisplayed"
@@ -16,11 +16,9 @@
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
       >
-        <!--        <File />-->
         {{ index }}
       </li>
     </ul>
-    <!--    <File class="desktop-page__file" v-if="isFileCreated" />-->
     <File
       @click="deleteFile(file.id)"
       :id="file.id"
@@ -35,15 +33,6 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import TheOptions from '@/shared/TheOptions.vue'
 import File from '@/shared/IconItem/File.vue'
-//TODO: ПРИВЕСТИ В порядок компонент theOptions.
-// Удолить лишнее
-// Почистить комменты
-// Options принимает в себя пропс
-// Сделать отдельную репу для компонента. Выложить его отдельно
-
-// Ынести options в desktop
-//У ноды должен быть треугольник
-// в эмит передаем action
 
 // const block = ref(null)
 const grid = ref(null)
@@ -76,6 +65,12 @@ onMounted(() => {
   pageWidth.value = desktopPage.value.offsetWidth
 })
 
+function onOption() {
+  closeSelect()
+  createFile({ left: `${coordinates[0]}px`, top: `${coordinates[1]}px` })
+  clearCurrentIndex()
+}
+
 function onBlock(index) {
   chosenTagIndex.value = index
 }
@@ -87,11 +82,11 @@ function showSelect(event) {
   const isNeedStickOptionsToRight = windowWidth < coordinates[0] + MENU_WIDTH
   const isNeedStickOptionsToBottom = windowHeight < coordinates[1] + MENU_HEIGHT
 
-  // Check if there's less than 250px space to the right of the menu
+  // Check if there's less than 210px space to the right of the menu
   if (isNeedStickOptionsToRight) {
     coordinates[0] = windowWidth - MENU_WIDTH
   }
-  // Check if there's less than 260px space to the bottom of the menu
+  // Check if there's less than 240px space to the bottom of the menu
   if (isNeedStickOptionsToBottom) {
     coordinates[1] = windowHeight - MENU_HEIGHT
   }
@@ -110,10 +105,12 @@ function deleteFile(id) {
   files.splice(fileIndex, 1)
 }
 
+function clearCurrentIndex() {
+  chosenTagIndex.value = null
+}
+
 function closeSelect() {
   isOptionsDisplayed.value = false
-  createFile({ left: `${coordinates[0]}px`, top: `${coordinates[1]}px` })
-  // chosenTagIndex.value = null
 }
 function getNumberOfBlocks() {
   const width = desktopPage.value.offsetWidth
@@ -149,6 +146,10 @@ function getNumberOfBlocks() {
 // const topCoord = computed(() => `${coordinates[1]}px`)
 const rowGap = computed(() => `${verticalSpaceBetweenBlocks.value}px`)
 const columnGap = computed(() => `${horizontalSpaceBetweenBlocks.value}px`)
+
+defineExpose({
+  closeSelect
+})
 </script>
 
 <style scoped lang="scss">
@@ -159,14 +160,14 @@ $topCoord: v-bind(topCoord);
 $leftCoord: v-bind(leftCoord);
 
 .desktop {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('@/assets/images/background.svg');
-  color: white;
-  height: 100vh;
-  width: 100%;
-  font-size: 40px;
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+  ////background-image: url('@/assets/images/background.svg');
+  //color: white;
+  //height: 100vh;
+  //width: 100%;
+  //font-size: 40px;
 
   &-page {
     width: 100%;

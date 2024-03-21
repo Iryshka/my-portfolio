@@ -6,7 +6,7 @@
       <span class="click-select__dot"></span>
     </div>
 
-    <ul class="click-select__list">
+    <ul ref="node" class="click-select__list">
       <li v-for="option in options" :key="option.label" class="click-select__list-item">
         <the-node
           @action="$emit('action')"
