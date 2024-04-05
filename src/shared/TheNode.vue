@@ -4,21 +4,20 @@
       <p class="node__label">{{ label }}</p>
       <img
         class="node__img node__img-left"
-        v-show="props.options && direction === 'left'"
+        v-show="props.options && props.direction === 'left'"
         src="../assets/images/leftarrow.svg"
         alt=""
       />
       <img
         class="node__img node__img-right"
-        v-show="props.options && direction === 'right'"
+        v-show="props.options && props.direction === 'right'"
         src="../assets/images/rightarrow.svg"
         alt=""
       />
     </div>
-    <ul v-if="isOptionDisplayed" :class="[direction, { node__list: parsedOptions.length }]">
+    <ul v-if="isOptionDisplayed" :class="[props.direction, { node__list: parsedOptions.length }]">
       <li v-for="option in parsedOptions" :key="option.label" class="node__item">
         <the-node
-          ref="select"
           @action="$emit('action')"
           :label="option.label"
           :options="option.options"
@@ -30,20 +29,25 @@
   </div>
 </template>
 <script setup>
-import { ref, computed, onMounted, defineComponent, defineEmits } from 'vue'
+import { ref, computed, defineComponent, defineEmits, watch } from 'vue'
 
 const isOptionDisplayed = ref(false)
 
 const node = ref(null)
-const direction = ref('right')
+// const direction = ref('right')
 
 defineComponent({
   name: 'TheNode'
 })
+
 const props = defineProps({
   label: {
     type: String,
     default: null
+  },
+  direction: {
+    type: String,
+    default: 'right'
   },
   options: {
     type: Array
@@ -52,24 +56,17 @@ const props = defineProps({
     type: Function
   }
 })
+
 const parsedOptions = computed(() => props.options ?? [])
 
-onMounted(() => {
-  setDirection()
-})
+watch(
+  () => props.direction,
+  () => {
+    console.log('prop value changed', props.direction)
+  }
+)
 
 const emit = defineEmits(['action'])
-
-function setDirection() {
-  // const size = node.value.getBoundingClientRect()
-  // const isSpaceEnough = Math.floor(size.left)
-  // direction.value = isSpaceEnough >= 220 ? 'left' : 'right'
-  const size = node.value.getBoundingClientRect()
-  const isSpaceEnough = window.innerWidth - Math.floor(size.left)
-  const spaceNeeded = 210 * parsedOptions.value.length
-  direction.value = isSpaceEnough >= spaceNeeded ? 'right' : 'left'
-  console.log(direction)
-}
 
 function onNode() {
   console.log('onNode', props)

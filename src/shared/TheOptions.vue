@@ -6,13 +6,14 @@
       <span class="click-select__dot"></span>
     </div>
 
-    <ul ref="node" class="click-select__list">
+    <ul ref="elementList" class="click-select__list">
       <li v-for="option in options" :key="option.label" class="click-select__list-item">
         <the-node
           @action="$emit('action')"
           :label="option.label"
           :options="option.options"
           :action="option.action"
+          :direction="direction"
         />
       </li>
     </ul>
@@ -20,29 +21,13 @@
 </template>
 
 <script setup>
-import { defineEmits, reactive } from 'vue'
+import { ref, defineEmits, reactive, onMounted } from 'vue'
 import TheNode from '@/shared/TheNode.vue'
 
-const props = defineProps({
-  coordinates: {
-    type: Array
-  },
-  pageWidth: {
-    type: Number
-  }
-})
+const direction = ref(null)
+const elementList = ref(null)
 
-const styles = reactive({
-  top: props.coordinates[1] + 'px',
-  left: props.coordinates[0] + 'px'
-})
-
-console.log(props.coordinates[0], props.coordinates[1])
-
-defineEmits(['action'])
-
-// TODO: вынести options в desktop
-const options = reactive([
+const options = [
   {
     label: 'Create',
     options: [
@@ -56,6 +41,9 @@ const options = reactive([
           {
             label: 'pdf',
             action: () => console.log('create pdf file')
+          },
+          {
+            label: 'mp3'
           }
         ]
       },
@@ -68,7 +56,63 @@ const options = reactive([
     label: 'Open',
     action: () => console.log('open')
   }
-])
+]
+
+const props = defineProps({
+  coordinates: {
+    type: Array
+  }
+})
+
+const styles = reactive({
+  top: props.coordinates[1] + 'px',
+  left: props.coordinates[0] + 'px'
+})
+
+onMounted(() => {
+  setDirection()
+})
+
+function setDirection() {
+  const size = elementList.value.getBoundingClientRect()
+  const remainingSpace = window.innerWidth - Math.floor(size.right)
+  direction.value = remainingSpace >= 210 ? 'right' : 'left'
+  console.log(direction.value)
+  // const size = node.value.getBoundingClientRect()
+  // const remainingSpace = window.innerWidth - Math.floor(size.right)
+  // const spaceNeeded = 210 * getNumberOfLongestNestedList(options)
+  // direction.value = remainingSpace >= spaceNeeded ? 'right' : 'left'
+  // console.log(direction)
+}
+
+function getNumberOfLongestNestedList(options) {
+  let maxCount = 0
+
+  function countRecursevly(options, count = 0) {
+    if (options.length) {
+      options.forEach((option) => {
+        if (!option.options) {
+          if (maxCount < count) {
+            maxCount = count
+          }
+        } else {
+          countRecursevly(option.options, count + 1)
+        }
+      })
+    }
+  }
+  countRecursevly(options)
+  console.log(maxCount)
+  return maxCount
+}
+
+console.log(props.coordinates[0], props.coordinates[1])
+
+defineEmits(['action'])
+
+defineExpose({
+  getNumberOfLongestNestedList
+})
 
 // const x = computed(() => props.coordinates[0] + 'px')
 // const y = computed(() => props.coordinates[1] + 'px')

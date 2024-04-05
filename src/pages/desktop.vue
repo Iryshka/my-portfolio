@@ -34,7 +34,6 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import TheOptions from '@/shared/TheOptions.vue'
 import File from '@/shared/IconItem/File.vue'
 
-// const block = ref(null)
 const grid = ref(null)
 const desktopPage = ref(null)
 
@@ -45,7 +44,6 @@ const coordinates = reactive([])
 const isOptionsDisplayed = ref(false)
 const pageWidth = ref(0)
 const options = ref(null)
-// const isFileCreated = ref(false)
 
 const horizontalSpaceBetweenBlocks = ref(0)
 const verticalSpaceBetweenBlocks = ref(0)
@@ -160,15 +158,6 @@ $topCoord: v-bind(topCoord);
 $leftCoord: v-bind(leftCoord);
 
 .desktop {
-  //display: flex;
-  //justify-content: center;
-  //align-items: center;
-  ////background-image: url('@/assets/images/background.svg');
-  //color: white;
-  //height: 100vh;
-  //width: 100%;
-  //font-size: 40px;
-
   &-page {
     width: 100%;
     height: 100%;
