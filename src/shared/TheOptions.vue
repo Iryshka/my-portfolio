@@ -76,13 +76,9 @@ onMounted(() => {
 function setDirection() {
   const size = elementList.value.getBoundingClientRect()
   const remainingSpace = window.innerWidth - Math.floor(size.right)
-  direction.value = remainingSpace >= 210 ? 'right' : 'left'
+  const spaceNeeded = 210 * getNumberOfLongestNestedList(options)
+  direction.value = remainingSpace >= spaceNeeded ? 'right' : 'left'
   console.log(direction.value)
-  // const size = node.value.getBoundingClientRect()
-  // const remainingSpace = window.innerWidth - Math.floor(size.right)
-  // const spaceNeeded = 210 * getNumberOfLongestNestedList(options)
-  // direction.value = remainingSpace >= spaceNeeded ? 'right' : 'left'
-  // console.log(direction)
 }
 
 function getNumberOfLongestNestedList(options) {
