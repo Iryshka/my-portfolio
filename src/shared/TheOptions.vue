@@ -98,17 +98,12 @@ function getNumberOfLongestNestedList(options) {
     }
   }
   countRecursevly(options)
-  console.log(maxCount)
   return maxCount
 }
 
 console.log(props.coordinates[0], props.coordinates[1])
 
 defineEmits(['action'])
-
-defineExpose({
-  getNumberOfLongestNestedList
-})
 
 // const x = computed(() => props.coordinates[0] + 'px')
 // const y = computed(() => props.coordinates[1] + 'px')

@@ -1,5 +1,4 @@
 <script setup>
-// Компонент должен принимать в себя тип файла и название пропсом.
 defineProps({
   modelValue: {
     type: Object

@@ -9,15 +9,12 @@
       />
     </transition>
     <ul class="desktop-page__list">
-      <li
-        @contextmenu.prevent="onBlock(index)"
-        ref="grid"
-        class="block"
+      <BlockComponent
+        @choose-current-index="onBlock"
+        :block-index="index"
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
-      >
-        {{ index }}
-      </li>
+      />
     </ul>
     <File
       @click="deleteFile(file.id)"
@@ -26,13 +23,15 @@
       v-for="(file, index) in files"
       :key="index"
       :style="{ left: file.position.left, top: file.position.top }"
+      style="position: absolute"
     />
   </div>
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, nextTick } from 'vue'
 import TheOptions from '@/shared/TheOptions.vue'
 import File from '@/shared/IconItem/File.vue'
+import BlockComponent from '@/components/Block/BlockComponent.vue'
 
 const grid = ref(null)
 const desktopPage = ref(null)
@@ -53,10 +52,11 @@ const MENU_HEIGHT = 240
 const windowWidth = window.innerWidth
 const windowHeight = window.innerHeight
 
-let files = reactive([])
+const files = reactive([])
 let fileCreated = 0
+const clickedBlock = ref(null)
 
-const chosenTagIndex = ref(null)
+const currentIndex = ref(null)
 
 onMounted(() => {
   getNumberOfBlocks()
@@ -69,8 +69,18 @@ function onOption() {
   clearCurrentIndex()
 }
 
-function onBlock(index) {
-  chosenTagIndex.value = index
+async function onBlock(index) {
+  console.log(index)
+  currentIndex.value = index
+  await nextTick()
+  console.log(currentIndex.value)
+}
+
+function createFile(position) {
+  fileCreated++
+  const id = fileCreated
+  files.push({ position, id })
+  console.log(files)
 }
 
 function showSelect(event) {
@@ -89,13 +99,6 @@ function showSelect(event) {
     coordinates[1] = windowHeight - MENU_HEIGHT
   }
   isOptionsDisplayed.value = true
-}
-
-function createFile(position) {
-  fileCreated++
-  const id = fileCreated
-  files.push({ position, id })
-  console.log(files)
 }
 
 function deleteFile(id) {
