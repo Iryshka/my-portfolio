@@ -78,7 +78,6 @@ function setDirection() {
   const remainingSpace = window.innerWidth - Math.floor(size.right)
   const spaceNeeded = 210 * getNumberOfLongestNestedList(options)
   direction.value = remainingSpace >= spaceNeeded ? 'right' : 'left'
-  console.log(direction.value)
 }
 
 function getNumberOfLongestNestedList(options) {

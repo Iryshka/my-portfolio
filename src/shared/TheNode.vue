@@ -59,12 +59,12 @@ const props = defineProps({
 
 const parsedOptions = computed(() => props.options ?? [])
 
-watch(
-  () => props.direction,
-  () => {
-    console.log('prop value changed', props.direction)
-  }
-)
+// watch(
+//   () => props.direction,
+//   () => {
+//     console.log('prop value changed', props.direction)
+//   }
+// )
 
 const emit = defineEmits(['action'])
 

@@ -21,14 +21,12 @@
       :id="file.id"
       class="desktop-page__file"
       v-for="(file, index) in files"
-      :key="index"
-      :style="{ left: file.position.left, top: file.position.top }"
-      style="position: absolute"
+      :key="file.id"
     />
   </div>
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted, nextTick } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import TheOptions from '@/shared/TheOptions.vue'
 import File from '@/shared/IconItem/File.vue'
 import BlockComponent from '@/components/Block/BlockComponent.vue'
@@ -54,7 +52,6 @@ const windowHeight = window.innerHeight
 
 const files = reactive([])
 let fileCreated = 0
-const clickedBlock = ref(null)
 
 const currentIndex = ref(null)
 
@@ -65,21 +62,19 @@ onMounted(() => {
 
 function onOption() {
   closeSelect()
-  createFile({ left: `${coordinates[0]}px`, top: `${coordinates[1]}px` })
+  createFile()
   clearCurrentIndex()
 }
 
-async function onBlock(index) {
-  console.log(index)
+function onBlock(index) {
   currentIndex.value = index
-  await nextTick()
   console.log(currentIndex.value)
 }
 
-function createFile(position) {
+function createFile() {
   fileCreated++
   const id = fileCreated
-  files.push({ position, id })
+  files.push(id)
   console.log(files)
 }
 
@@ -107,7 +102,7 @@ function deleteFile(id) {
 }
 
 function clearCurrentIndex() {
-  chosenTagIndex.value = null
+  currentIndex.value = null
 }
 
 function closeSelect() {
@@ -177,9 +172,6 @@ $leftCoord: v-bind(leftCoord);
   }
 
   &-page__file {
-    position: absolute;
-    //top: $topCoord;
-    //left: $leftCoord;
   }
 }
 

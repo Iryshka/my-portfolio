@@ -4,18 +4,24 @@
     @contextmenu.prevent="$emit('chooseCurrentIndex', blockIndex)"
     :key="blockIndex"
   >
+    <slot />
+
     {{ blockIndex }}
   </li>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-const blockSize = 70
+import { ref, defineProps } from 'vue'
+import File from '@/shared/IconItem/File.vue'
 
 defineProps({
   blockIndex: {
     type: Number,
     required: true
+  },
+  files: {
+    type: Array,
+    default: () => {}
   }
 })
 </script>
