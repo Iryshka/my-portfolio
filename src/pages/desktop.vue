@@ -10,13 +10,14 @@
       />
     </transition>
     <ul class="desktop-page__list">
+      <Bio />
+
       <BlockComponent
         @choose-current-index="onBlock"
         :block-index="index"
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
         ><File v-if="files[index]">I'm file</File>
-        <!--        <Bio @dblclick="openFolder" />-->
       </BlockComponent>
     </ul>
   </div>

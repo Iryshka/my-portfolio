@@ -26,7 +26,13 @@
         </g>
       </g>
     </svg>
-    <input v-click-outside="exitEditMode" v-model="title" v-if="isEditMode" type="text" />
+    <input
+      v-click-outside="exitEditMode"
+      @keyup.enter="exitEditMode"
+      v-model="title"
+      v-if="isEditMode"
+      type="text"
+    />
     <p v-else @dblclick="changeTitle" class="file__title">{{ title }}</p>
   </div>
 </template>
@@ -44,7 +50,6 @@ function exitEditMode() {
   console.log('click outside')
   isEditMode.value = false
 }
-// расширение - txt, mp3, folder, png // иконка // название // дата созадния
 </script>
 
 <style scoped lang="scss">
