@@ -11,8 +11,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue'
-import File from '@/shared/IconItem/File.vue'
+import { defineProps } from 'vue'
 
 defineProps({
   blockIndex: {

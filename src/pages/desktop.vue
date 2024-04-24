@@ -2,7 +2,8 @@
   <div ref="desktopPage" @contextmenu.prevent.stop="showSelect" class="desktop-page">
     <transition>
       <the-options
-        @action="onOption"
+        @create-file="createFile"
+        @delete-file="deleteFile"
         ref="options"
         :coordinates="coordinates"
         v-if="isOptionsDisplayed"
@@ -14,15 +15,10 @@
         :block-index="index"
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
-      />
+        ><File v-if="files[index]">I'm file</File>
+        <!--        <Bio @dblclick="openFolder" />-->
+      </BlockComponent>
     </ul>
-    <File
-      @click="deleteFile(file.id)"
-      :id="file.id"
-      class="desktop-page__file"
-      v-for="(file, index) in files"
-      :key="file.id"
-    />
   </div>
 </template>
 <script setup>
@@ -30,6 +26,7 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import TheOptions from '@/shared/TheOptions.vue'
 import File from '@/shared/IconItem/File.vue'
 import BlockComponent from '@/components/Block/BlockComponent.vue'
+import Bio from '@/shared/IconItem/Bio.vue'
 
 const grid = ref(null)
 const desktopPage = ref(null)
@@ -42,6 +39,10 @@ const isOptionsDisplayed = ref(false)
 const pageWidth = ref(0)
 const options = ref(null)
 
+function openFolder() {
+  console.log("i'm clicked twice")
+}
+
 const horizontalSpaceBetweenBlocks = ref(0)
 const verticalSpaceBetweenBlocks = ref(0)
 
@@ -50,7 +51,7 @@ const MENU_HEIGHT = 240
 const windowWidth = window.innerWidth
 const windowHeight = window.innerHeight
 
-const files = reactive([])
+const files = reactive({})
 let fileCreated = 0
 
 const currentIndex = ref(null)
@@ -72,10 +73,13 @@ function onBlock(index) {
 }
 
 function createFile() {
+  closeSelect()
   fileCreated++
-  const id = fileCreated
-  files.push(id)
-  console.log(files)
+  files[currentIndex.value] = {
+    ext: 'txt',
+    name: 'file'
+  }
+  clearCurrentIndex()
 }
 
 function showSelect(event) {
@@ -96,9 +100,10 @@ function showSelect(event) {
   isOptionsDisplayed.value = true
 }
 
-function deleteFile(id) {
-  const fileIndex = files.findIndex((file) => file.id === id)
-  files.splice(fileIndex, 1)
+function deleteFile() {
+  closeSelect()
+  delete files[currentIndex.value]
+  clearCurrentIndex()
 }
 
 function clearCurrentIndex() {

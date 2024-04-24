@@ -26,11 +26,24 @@
         </g>
       </g>
     </svg>
-    <p class="file__title">document</p>
+    <input v-click-outside="exitEditMode" v-model="title" v-if="isEditMode" type="text" />
+    <p v-else @dblclick="changeTitle" class="file__title">{{ title }}</p>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+const title = ref('document')
+const isEditMode = ref(false)
+function changeTitle() {
+  isEditMode.value = true
+}
+
+function exitEditMode() {
+  console.log('click outside')
+  isEditMode.value = false
+}
 // расширение - txt, mp3, folder, png // иконка // название // дата созадния
 </script>
 

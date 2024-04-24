@@ -9,7 +9,6 @@
     <ul ref="elementList" class="click-select__list">
       <li v-for="option in options" :key="option.label" class="click-select__list-item">
         <the-node
-          @action="$emit('action')"
           :label="option.label"
           :options="option.options"
           :action="option.action"
@@ -36,11 +35,11 @@ const options = [
         options: [
           {
             label: 'txt',
-            action: () => console.log('create txt file')
+            action: () => emit('create-file')
           },
           {
             label: 'pdf',
-            action: () => console.log('create pdf file')
+            action: () => emit('create-file')
           },
           {
             label: 'mp3'
@@ -55,8 +54,14 @@ const options = [
   {
     label: 'Open',
     action: () => console.log('open')
+  },
+  {
+    label: 'Delete',
+    action: () => emit('delete-file')
   }
 ]
+
+const emit = defineEmits(['action', 'create-file', 'delete-file'])
 
 const props = defineProps({
   coordinates: {
@@ -101,8 +106,6 @@ function getNumberOfLongestNestedList(options) {
 }
 
 console.log(props.coordinates[0], props.coordinates[1])
-
-defineEmits(['action'])
 
 // const x = computed(() => props.coordinates[0] + 'px')
 // const y = computed(() => props.coordinates[1] + 'px')

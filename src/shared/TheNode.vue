@@ -18,7 +18,6 @@
     <ul v-if="isOptionDisplayed" :class="[props.direction, { node__list: parsedOptions.length }]">
       <li v-for="option in parsedOptions" :key="option.label" class="node__item">
         <the-node
-          @action="$emit('action')"
           :label="option.label"
           :options="option.options"
           :direction="direction"
@@ -29,7 +28,7 @@
   </div>
 </template>
 <script setup>
-import { ref, computed, defineComponent, defineEmits, watch } from 'vue'
+import { ref, computed, defineComponent } from 'vue'
 
 const isOptionDisplayed = ref(false)
 
@@ -59,20 +58,14 @@ const props = defineProps({
 
 const parsedOptions = computed(() => props.options ?? [])
 
-// watch(
-//   () => props.direction,
-//   () => {
-//     console.log('prop value changed', props.direction)
-//   }
-// )
-
-const emit = defineEmits(['action'])
+// const emit = defineEmits(['action'])
 
 function onNode() {
   console.log('onNode', props)
   if (props.action) {
-    emit('action')
+    // emit('action')
     console.log('click on action')
+    props.action()
   } else {
     isOptionDisplayed.value = !isOptionDisplayed.value
   }
