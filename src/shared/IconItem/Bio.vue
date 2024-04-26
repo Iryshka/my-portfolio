@@ -1,9 +1,14 @@
 <template>
   <div class="bio">
-    <div class="bio__dots">
-      <span class="bio__dot"></span>
-      <span class="bio__dot"></span>
-      <span class="bio__dot"></span>
+    <div class="bio__top-line">
+      <div class="bio__dots">
+        <span class="bio__dot"></span>
+        <span class="bio__dot"></span>
+        <span class="bio__dot"></span>
+      </div>
+      <div class="bio__close">
+        <img src="../../assets/images/close.svg" alt="" class="bio__close-img" />
+      </div>
     </div>
 
     <div class="bio__info">
@@ -49,6 +54,12 @@
   box-shadow: 7px 10px 0px 0px rgba(35, 29, 29, 100);
   max-width: 600px;
   max-height: 440px;
+
+  &__close-img {
+    position: absolute;
+    top: -25px;
+    right: -3px;
+  }
 
   &__dots {
     width: 100%;
