@@ -46,6 +46,7 @@
   border: 5px solid #e54ee2ff;
   border-top-width: 30px;
   background-color: #231d1d;
+  box-shadow: 7px 10px 0px 0px rgba(35, 29, 29, 100);
   max-width: 600px;
   max-height: 440px;
 
@@ -111,6 +112,11 @@
     font-size: 14px;
     color: #c4c4c4;
     text-decoration: navajowhite;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #e54ee2ff;
+    }
   }
 }
 </style>

@@ -10,16 +10,17 @@
       />
     </transition>
     <ul class="desktop-page__list">
-      <!--      <Bio />-->
-
       <BlockComponent
         @choose-current-index="onBlock"
         :block-index="index"
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
         ><File v-if="files[index]">I'm file</File>
-        <BioFolder v-if="index === 0" />
+        <BioFolder @dblclick="openBioFolder" v-if="index === 0" />
       </BlockComponent>
+      <Transition name="bounce">
+        <Bio class="bio" v-if="isBioDisplayed" />
+      </Transition>
     </ul>
   </div>
 </template>
@@ -32,6 +33,7 @@ import Bio from '@/shared/IconItem/Bio.vue'
 import BioFolder from '@/shared/IconItem/BioFolder.vue'
 
 const grid = ref(null)
+const isBioDisplayed = ref(false)
 const desktopPage = ref(null)
 
 const numberOfBlocksInWidth = ref(0)
@@ -42,7 +44,8 @@ const isOptionsDisplayed = ref(false)
 const pageWidth = ref(0)
 const options = ref(null)
 
-function openFolder() {
+function openBioFolder() {
+  isBioDisplayed.value = true
   console.log("i'm clicked twice")
 }
 
@@ -190,6 +193,12 @@ $leftCoord: v-bind(leftCoord);
   height: 70px;
 }
 
+.bio {
+  &:hover {
+    cursor: url('../assets/images/hand-cursor3.svg'), auto;
+  }
+}
+
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s ease;
@@ -198,5 +207,23 @@ $leftCoord: v-bind(leftCoord);
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.6s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.6s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

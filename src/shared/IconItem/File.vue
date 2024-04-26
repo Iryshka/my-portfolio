@@ -10,7 +10,7 @@
       <g id="page.block">
         <g id="page.fill">
           <path d="M72 4H4V124H96V28H72V4Z" fill="black" />
-          <path d="M80 4H76V24H96V20H92V16H88V12H84V8H80V4Z" fill="#FFFF50" />
+          <path d="M80 4H76V24H96V20H92V16H88V12H84V8H80V4Z" fill="#e54ee2ff" />
         </g>
         <g id="page.outline">
           <path
