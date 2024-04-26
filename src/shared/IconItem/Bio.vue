@@ -17,7 +17,24 @@
       </article>
     </div>
     <aside class="bio__links">
-      <img class="bio__link" src="@/assets/images/linkedin-image.svg" alt="" />
+      <div class="bio__linkedin">
+        <a href="https://www.linkedin.com/in/irina-k-294534268/" target="_blank" class="bio__link">
+          <img class="bio__social-img" src="../../assets/images/linkedin-image.svg" alt="" />
+          <p class="bio__linkedin-p">linkedin</p>
+        </a>
+      </div>
+      <div class="bio__github">
+        <a href="https://github.com/Iryshka" target="_blank" class="bio__link">
+          <img class="bio__social-img" src="../../assets/images/github-image.svg" alt="" />
+          <p class="bio__linkedin-p">github</p>
+        </a>
+      </div>
+      <div class="bio__telegram">
+        <a href="https://desktop.telegram.org/" target="_blank" class="bio__link">
+          <img class="bio__social-img" src="../../assets/images/telegram-image.svg" alt="" />
+          <p class="bio__linkedin-p">telegram</p>
+        </a>
+      </div>
     </aside>
   </div>
 </template>
@@ -56,7 +73,8 @@
   }
 
   &__info {
-    font-family: 'IBM Plex Mono', sans-serif;
+    font-family: 'IBM Plex Mono', serif;
+    line-height: 1.5;
     color: #e0d4d4;
     display: flex;
     flex-direction: row;
@@ -68,17 +86,31 @@
   &__title {
     font-size: 32px;
     margin-bottom: 10px;
+    line-height: 1.3;
   }
 
   &__links {
     display: flex;
     flex-direction: row;
+    gap: 70px;
+    margin: 0 0 10px 30px;
+  }
+
+  &__social-img {
+    width: 25px;
+    height: 25px;
+    z-index: 2;
   }
 
   &__link {
-    width: 50px;
-    height: 50px;
-    z-index: 2;
+    cursor: url('../../assets/images/hand-cursor3.svg'), auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: 'IBM Plex Mono', serif;
+    font-size: 14px;
+    color: #c4c4c4;
+    text-decoration: navajowhite;
   }
 }
 </style>

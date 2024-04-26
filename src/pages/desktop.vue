@@ -10,7 +10,7 @@
       />
     </transition>
     <ul class="desktop-page__list">
-      <Bio />
+      <!--      <Bio />-->
 
       <BlockComponent
         @choose-current-index="onBlock"
@@ -18,6 +18,7 @@
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
         ><File v-if="files[index]">I'm file</File>
+        <BioFolder v-if="index === 0" />
       </BlockComponent>
     </ul>
   </div>
@@ -28,6 +29,7 @@ import TheOptions from '@/shared/TheOptions.vue'
 import File from '@/shared/IconItem/File.vue'
 import BlockComponent from '@/components/Block/BlockComponent.vue'
 import Bio from '@/shared/IconItem/Bio.vue'
+import BioFolder from '@/shared/IconItem/BioFolder.vue'
 
 const grid = ref(null)
 const desktopPage = ref(null)
@@ -182,8 +184,8 @@ $leftCoord: v-bind(leftCoord);
 }
 
 .block {
-  border: 1px solid pink;
-  opacity: 1;
+  //border: 1px solid pink;
+  //opacity: 1;
   width: 70px;
   height: 70px;
 }
