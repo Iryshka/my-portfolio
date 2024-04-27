@@ -19,7 +19,7 @@
         <BioFolder @dblclick="openBioFolder" v-if="index === 0" />
       </BlockComponent>
       <Transition name="bounce">
-        <Bio class="bio" v-if="isBioDisplayed" />
+        <Bio @onClick="closeBio" class="bio" v-if="isBioDisplayed" />
       </Transition>
     </ul>
   </div>
@@ -47,6 +47,11 @@ const options = ref(null)
 function openBioFolder() {
   isBioDisplayed.value = true
   console.log("i'm clicked twice")
+}
+
+function closeBio() {
+  console.log('closing bio')
+  isBioDisplayed.value = false
 }
 
 const horizontalSpaceBetweenBlocks = ref(0)

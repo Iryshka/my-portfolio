@@ -6,7 +6,7 @@
         <span class="bio__dot"></span>
         <span class="bio__dot"></span>
       </div>
-      <div class="bio__close">
+      <div @click="$emit('onClick')" class="bio__close">
         <img src="../../assets/images/close.svg" alt="" class="bio__close-img" />
       </div>
     </div>
@@ -14,7 +14,7 @@
     <div class="bio__info">
       <img src="@/assets/images/bio-photo.jfif" class="bio__img" alt="" />
       <article class="bio__text">
-        <h2 class="bio__title">Hi there! 👋I'm Iryshka</h2>
+        <h2 class="bio__title" title="Hi there! 👋I'm Iryshka">Hi there! 👋I'm Iryshka</h2>
         <p class="bio__desc">
           I'm a frontend developer with a keen interest in web development. Vue JS | JavaScript
           junkie
@@ -43,22 +43,37 @@
     </aside>
   </div>
 </template>
-<script setup></script>
+<script setup>
+// import { defineEmits } from 'vue'
+//
+// defineEmits(['onClick'])
+</script>
 <style scoped lang="scss">
 .bio {
+  background: linear-gradient(
+      177deg,
+      rgba(2, 0, 36, 0.5) 0%,
+      rgba(2, 2, 6, 0.9) 75%,
+      rgba(219, 14, 208, 0.5) 100%
+    ),
+    url('../../assets/images/retro-bg2.jpg');
+  //background-image: url('../../assets/images/retro-bg2.jpg');
+
+  background-size: cover;
   position: fixed;
   margin: 10px;
   border: 5px solid #e54ee2ff;
   border-top-width: 30px;
-  background-color: #231d1d;
-  box-shadow: 7px 10px 0px 0px rgba(35, 29, 29, 100);
+  //background-color: #231d1d;
+  box-shadow: 7px 10px 0 0 rgba(35, 29, 29, 100);
   max-width: 600px;
   max-height: 440px;
 
   &__close-img {
     position: absolute;
-    top: -25px;
-    right: -3px;
+    top: -30px;
+    right: -9px;
+    padding: 5px;
   }
 
   &__dots {
@@ -79,7 +94,7 @@
 
   &__img {
     border: 15px solid #e54ee2ff;
-    box-shadow: 0 0 0 12px #a1ffcd;
+    box-shadow: 0 0 0 12px #5efc8d;
     width: 200px;
     height: 200px;
   }
