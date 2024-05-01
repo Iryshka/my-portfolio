@@ -26,7 +26,8 @@
         </g>
       </g>
     </svg>
-    <input
+    <textarea
+      class="file__input"
       v-click-outside="exitEditMode"
       @keyup.enter="exitEditMode"
       v-model="title"
@@ -58,10 +59,26 @@ function exitEditMode() {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   &__title {
     font-size: 14px;
+    white-space: pre-wrap;
     color: black;
+    width: 80px;
     font-weight: bold;
+  }
+
+  &__input {
+    margin-top: 10px;
+    width: 60px;
+    font-size: 14px;
+    resize: none;
+    overflow: hidden;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
   }
 }
 </style>

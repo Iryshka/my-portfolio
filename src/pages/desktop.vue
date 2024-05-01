@@ -12,7 +12,9 @@
     <ul class="desktop-page__list">
       <BlockComponent
         @choose-current-index="onBlock"
+        @setCoordinates="changeCoordinates"
         :block-index="index"
+        :blocks-coordinates="blocksCoordinates"
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
         ><File v-if="files[index]">I'm file</File>
@@ -32,17 +34,23 @@ import BlockComponent from '@/components/Block/BlockComponent.vue'
 import Bio from '@/shared/IconItem/Bio.vue'
 import BioFolder from '@/shared/IconItem/BioFolder.vue'
 
-const grid = ref(null)
+const blocksCoordinates = ref({})
+// const grid = ref(null)
 const isBioDisplayed = ref(false)
 const desktopPage = ref(null)
 
 const numberOfBlocksInWidth = ref(0)
 const numberOfBlocksInHeight = ref(0)
-const totalNumberOfBlocks = ref(0)
+const totalNumberOfBlocks = ref([])
 const coordinates = reactive([])
 const isOptionsDisplayed = ref(false)
 const pageWidth = ref(0)
 const options = ref(null)
+
+function changeCoordinates({ index, top, left }) {
+  blocksCoordinates.value[index] = { top, left }
+  console.log(index, left, top)
+}
 
 function openBioFolder() {
   isBioDisplayed.value = true

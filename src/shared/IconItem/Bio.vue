@@ -14,7 +14,11 @@
     <div class="bio__info">
       <img src="@/assets/images/bio-photo.jfif" class="bio__img" alt="" />
       <article class="bio__text">
-        <h2 class="bio__title" title="Hi there! 👋I'm Iryshka">Hi there! 👋I'm Iryshka</h2>
+        <AnimatedText
+          ><h2>Hi there!</h2>
+          <h2>I'm Iryshka</h2></AnimatedText
+        >
+        <!--        <h2 class="bio__title">Hi there! 👋 I'm Iryshka</h2>-->
         <p class="bio__desc">
           I'm a frontend developer with a keen interest in web development. Vue JS | JavaScript
           junkie
@@ -44,9 +48,7 @@
   </div>
 </template>
 <script setup>
-// import { defineEmits } from 'vue'
-//
-// defineEmits(['onClick'])
+import AnimatedText from '@/shared/IconItem/ui/AnimatedText.vue'
 </script>
 <style scoped lang="scss">
 .bio {
@@ -108,6 +110,10 @@
     align-items: center;
     gap: 45px;
     margin: 35px;
+  }
+
+  &__text {
+    width: 100%;
   }
 
   &__title {

@@ -1,5 +1,6 @@
 <template>
   <li
+    ref="block"
     class="block"
     @contextmenu.prevent="$emit('chooseCurrentIndex', blockIndex)"
     :key="blockIndex"
@@ -11,9 +12,12 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, onMounted, ref } from 'vue'
 
-defineProps({
+const block = ref(null)
+
+const emit = defineEmits(['setCoordinates'])
+const props = defineProps({
   blockIndex: {
     type: Number,
     required: true
@@ -21,7 +25,14 @@ defineProps({
   files: {
     type: Array,
     default: () => {}
-  }
+  },
+  blocksCoordinates: {}
+})
+
+onMounted(() => {
+  const { left, top } = block.value.getBoundingClientRect()
+  emit('setCoordinates', { index: props.blockIndex, left, top })
+  console.log(block.value.getBoundingClientRect(), props.blocksCoordinates)
 })
 </script>
 
