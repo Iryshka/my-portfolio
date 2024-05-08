@@ -49,7 +49,7 @@
           <rect width="128" height="128" fill="white" />
         </clipPath>
       </defs>
-      <p class="bio__title">About me</p>
+      <p class="bio__title">My pics</p>
     </svg>
   </div>
 </template>

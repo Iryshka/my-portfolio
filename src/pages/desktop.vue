@@ -18,7 +18,7 @@
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
         ><File v-if="files[index]">I'm file</File>
-        <BioFolder @dblclick="openBioFolder" v-if="index === 0" />
+        <Resume @dblclick="openResume" v-if="index === 0" class="resume" />
       </BlockComponent>
       <Transition name="bounce">
         <Bio @onClick="closeBio" class="bio" v-if="isBioDisplayed" />
@@ -27,15 +27,16 @@
   </div>
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import TheOptions from '@/shared/TheOptions.vue'
 import File from '@/shared/IconItem/File.vue'
 import BlockComponent from '@/components/Block/BlockComponent.vue'
 import Bio from '@/shared/IconItem/Bio.vue'
+import Resume from '@/shared/Resume.vue'
 import BioFolder from '@/shared/IconItem/BioFolder.vue'
 
-const blocksCoordinates = ref({})
-// const grid = ref(null)
+const blocksCoordinates = reactive({})
+
 const isBioDisplayed = ref(false)
 const desktopPage = ref(null)
 
@@ -46,21 +47,6 @@ const coordinates = reactive([])
 const isOptionsDisplayed = ref(false)
 const pageWidth = ref(0)
 const options = ref(null)
-
-function changeCoordinates({ index, top, left }) {
-  blocksCoordinates.value[index] = { top, left }
-  console.log(index, left, top)
-}
-
-function openBioFolder() {
-  isBioDisplayed.value = true
-  console.log("i'm clicked twice")
-}
-
-function closeBio() {
-  console.log('closing bio')
-  isBioDisplayed.value = false
-}
 
 const horizontalSpaceBetweenBlocks = ref(0)
 const verticalSpaceBetweenBlocks = ref(0)
@@ -74,6 +60,52 @@ const files = reactive({})
 let fileCreated = 0
 
 const currentIndex = ref(null)
+
+function changeCoordinates({ index, top, left }) {
+  blocksCoordinates[index] = { top, left }
+}
+
+watch(blocksCoordinates, (newValue, oldValue) => {
+  if (newValue) {
+    console.log(findNearestBottom(0))
+  }
+})
+
+function findNearestBottom(currentIndex) {
+  // console.log(blocksCoordinates)
+  // First find current element from grouped blockCoordinates
+  // get current top coordinate from currentElement
+  const currentElement = blocksCoordinates[currentIndex]
+  const currentElementTopPosition = currentElement.top
+  const currentElementLeftPosition = currentElement.left
+
+  // make an array from blockCoordinates with structure [{index, top, left}]
+  // use Object.entries method https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+
+  const coordinatesList = Object.entries(blocksCoordinates).map((item) => {
+    const itemIndex = item[0]
+    const itemPosition = item[1]
+    return { index: itemIndex, ...itemPosition }
+  })
+  // sort array by top and left
+  const verticalBlocks = coordinatesList.filter(
+    (item) => item.left === currentElementLeftPosition && item.top > currentElementTopPosition
+  )
+  const sortedVerticalBlocks = verticalBlocks.sort((previous, next) => previous.top - next.top)
+  const nearestBottomBlock = sortedVerticalBlocks[0]
+  return nearestBottomBlock.index
+  // find first element with the same left and nearest top
+}
+
+function openResume() {
+  isBioDisplayed.value = true
+  console.log("i'm clicked twice")
+}
+
+function closeBio() {
+  console.log('closing bio')
+  isBioDisplayed.value = false
+}
 
 onMounted(() => {
   getNumberOfBlocks()

@@ -14,10 +14,10 @@
     <div class="bio__info">
       <img src="@/assets/images/bio-photo.jfif" class="bio__img" alt="" />
       <article class="bio__text">
-        <AnimatedText
-          ><h2>Hi there!</h2>
-          <h2>I'm Iryshka</h2></AnimatedText
-        >
+        <AnimatedText><h2>Hi there!</h2> </AnimatedText>
+        <AnimatedText>
+          <h2>I'm Iryshka</h2>
+        </AnimatedText>
         <!--        <h2 class="bio__title">Hi there! 👋 I'm Iryshka</h2>-->
         <p class="bio__desc">
           I'm a frontend developer with a keen interest in web development. Vue JS | JavaScript

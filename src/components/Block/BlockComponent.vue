@@ -32,7 +32,6 @@ const props = defineProps({
 onMounted(() => {
   const { left, top } = block.value.getBoundingClientRect()
   emit('setCoordinates', { index: props.blockIndex, left, top })
-  console.log(block.value.getBoundingClientRect(), props.blocksCoordinates)
 })
 </script>
 
