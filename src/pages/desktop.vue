@@ -34,7 +34,7 @@ import File from '@/shared/IconItem/File.vue'
 import BlockComponent from '@/components/Block/BlockComponent.vue'
 import Bio from '@/shared/IconItem/Bio.vue'
 import Resume from '@/shared/Resume.vue'
-import BioFolder from '@/shared/IconItem/BioFolder.vue'
+import ImageFolder from '@/shared/IconItem/ImageFolder.vue'
 import PhotoGallery from '@/shared/PhotoGallery.vue'
 
 const blocksCoordinates = reactive({})
