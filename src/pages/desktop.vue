@@ -10,6 +10,7 @@
       />
     </transition>
     <ul class="desktop-page__list">
+      <!--      <PhotoGallery />-->
       <BlockComponent
         @choose-current-index="onBlock"
         @setCoordinates="changeCoordinates"
@@ -34,6 +35,7 @@ import BlockComponent from '@/components/Block/BlockComponent.vue'
 import Bio from '@/shared/IconItem/Bio.vue'
 import Resume from '@/shared/Resume.vue'
 import BioFolder from '@/shared/IconItem/BioFolder.vue'
+import PhotoGallery from '@/shared/PhotoGallery.vue'
 
 const blocksCoordinates = reactive({})
 
