@@ -1,5 +1,5 @@
 <template>
-  <div class="bio">
+  <div class="image">
     <svg
       width="60"
       height="60"
@@ -49,13 +49,13 @@
           <rect width="128" height="128" fill="white" />
         </clipPath>
       </defs>
-      <p class="bio__title">My pics</p>
+      <p class="image__title">My pics</p>
     </svg>
   </div>
 </template>
 <script setup></script>
 <style scoped lang="scss">
-.bio {
+.image {
   display: flex;
   justify-content: center;
   align-items: center;
