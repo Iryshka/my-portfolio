@@ -18,7 +18,6 @@
         <AnimatedText>
           <h2>I'm Iryshka</h2>
         </AnimatedText>
-        <!--        <h2 class="bio__title">Hi there! 👋 I'm Iryshka</h2>-->
         <p class="bio__desc">
           I'm a frontend developer with a keen interest in web development. Vue JS | JavaScript
           junkie
@@ -113,6 +112,10 @@ import AnimatedText from '@/shared/IconItem/ui/AnimatedText.vue'
   }
 
   &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
     width: 100%;
   }
 

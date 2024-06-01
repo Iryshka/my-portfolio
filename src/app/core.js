@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import App from './index.vue'
 
+import drag from 'v-drag'
+
 const app = createApp(App)
 
 app.directive('click-outside', {

@@ -10,7 +10,6 @@
       />
     </transition>
     <ul class="desktop-page__list">
-      <!--      <PhotoGallery />-->
       <BlockComponent
         @choose-current-index="onBlock"
         @setCoordinates="changeCoordinates"
@@ -20,11 +19,22 @@
         :key="index"
         ><File v-if="files[index]">I'm file</File>
         <Resume @dblclick="openResume" v-if="index === 0" class="resume" />
+        <ImageFolder @dblclick="openPhotoGallery" v-if="index === Number(imageFolderIndex)" />
       </BlockComponent>
       <Transition name="bounce">
         <Bio @onClick="closeBio" class="bio" v-if="isBioDisplayed" />
       </Transition>
+      <Transition name="bounce">
+        <PhotoGallery
+          @onClick="closePhotoGallery"
+          @onImageClick="showFullPhoto"
+          v-if="isPhotoGalleryDisplayed"
+        />
+      </Transition>
     </ul>
+    <div v-if="isFullPhotoDisplayed" class="desktop-page__photo">
+      <img :src="fullPhotoSrc" alt="Full Photo" class="desktop-page__photo-img" />
+    </div>
   </div>
 </template>
 <script setup>
@@ -36,17 +46,20 @@ import Bio from '@/shared/IconItem/Bio.vue'
 import Resume from '@/shared/Resume.vue'
 import ImageFolder from '@/shared/IconItem/ImageFolder.vue'
 import PhotoGallery from '@/shared/PhotoGallery.vue'
-
 const blocksCoordinates = reactive({})
 
+const isFullPhotoDisplayed = ref(false)
 const isBioDisplayed = ref(false)
+const isPhotoGalleryDisplayed = ref(false)
+const isOptionsDisplayed = ref(false)
+
 const desktopPage = ref(null)
 
 const numberOfBlocksInWidth = ref(0)
 const numberOfBlocksInHeight = ref(0)
 const totalNumberOfBlocks = ref([])
 const coordinates = reactive([])
-const isOptionsDisplayed = ref(false)
+
 const pageWidth = ref(0)
 const options = ref(null)
 
@@ -62,6 +75,7 @@ const files = reactive({})
 let fileCreated = 0
 
 const currentIndex = ref(null)
+const imageFolderIndex = ref(null)
 
 function changeCoordinates({ index, top, left }) {
   blocksCoordinates[index] = { top, left }
@@ -69,8 +83,13 @@ function changeCoordinates({ index, top, left }) {
 
 watch(blocksCoordinates, (newValue, oldValue) => {
   if (newValue) {
+    imageFolderIndex.value = findNearestBottom(0)
     console.log(findNearestBottom(0))
   }
+})
+
+watch(files, (newValue, oldValue) => {
+  console.log({ newValue, oldValue })
 })
 
 function findNearestBottom(currentIndex) {
@@ -104,6 +123,25 @@ function openResume() {
   console.log("i'm clicked twice")
 }
 
+function openPhotoGallery() {
+  isPhotoGalleryDisplayed.value = true
+  console.log('photogallery clicked')
+}
+
+function closePhotoGallery() {
+  isPhotoGalleryDisplayed.value = false
+}
+
+const fullPhotoSrc = ref('')
+
+function showFullPhoto(image) {
+  fullPhotoSrc.value = image
+  isFullPhotoDisplayed.value = true
+}
+
+const closeFullPhoto = () => {
+  isFullPhotoDisplayed.value = false
+}
 function closeBio() {
   console.log('closing bio')
   isBioDisplayed.value = false
@@ -112,6 +150,15 @@ function closeBio() {
 onMounted(() => {
   getNumberOfBlocks()
   pageWidth.value = desktopPage.value.offsetWidth
+  const localStorageFilesString = localStorage.getItem('files')
+  if (localStorageFilesString) {
+    const filesObject = JSON.parse(localStorageFilesString)
+    for (const [key, value] of Object.entries(filesObject)) {
+      files[key] = value
+    }
+    console.log('setting files')
+  }
+  console.log(localStorage.getItem('files'))
 })
 
 function onOption() {
@@ -132,6 +179,7 @@ function createFile() {
     ext: 'txt',
     name: 'file'
   }
+  localStorage.setItem('files', JSON.stringify(files))
   clearCurrentIndex()
 }
 
@@ -194,6 +242,7 @@ function getNumberOfBlocks() {
   )
 
   totalNumberOfBlocks.value = numberOfBlocksInWidth.value * numberOfBlocksInHeight.value
+  // console.log(findNearestBottom(0))
 }
 
 // const leftCoord = computed(() => `${coordinates[0]}px`)
@@ -230,6 +279,21 @@ $leftCoord: v-bind(leftCoord);
   }
 
   &-page__file {
+  }
+
+  &-page__photo {
+    width: 350px;
+    height: 400px;
+    border: 6px solid deeppink;
+    position: absolute;
+    top: 50px;
+    left: 400px;
+  }
+
+  &-page__photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 

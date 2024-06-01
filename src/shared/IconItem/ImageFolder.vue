@@ -12,7 +12,7 @@
           fill-rule="evenodd"
           clip-rule="evenodd"
           d="M12 4V12H4V84H8V88H16V92H24V96H32V100H40V104H48V108H56V112H64V116H72V120H80V124H88V52H92V124H96V36H92V32H88V28H80V24H72V20H56V24H52V20H48V16H44V12H36V8H28V4H12ZM84 48H88V52H84V48ZM76 44H84V48H76V44ZM68 40H76V44H68V40ZM60 36H68V40H60V36ZM52 32H60V36H52V32ZM44 28H52V32H44V28ZM36 24H44V28H36V24ZM28 20H36V24H28V20ZM20 16H28V20H20V16ZM20 16V12H12V16H20Z"
-          fill="#e54ee2ff"
+          fill="#ffff50"
         />
         <path d="M8 0H28V4H12V12H4V84H8V88H0V8H8V0Z" fill="black" />
         <path d="M16 92V88H8V92H16Z" fill="black" />
@@ -53,7 +53,15 @@
     </svg>
   </div>
 </template>
-<script setup></script>
+<script>
+// import { VueDraggableDirective } from 'vue-draggable'
+//
+// export default {
+//   directives: {
+//     dragAndDrop: VueDraggableDirective
+//   }
+// }
+</script>
 <style scoped lang="scss">
 .image {
   display: flex;
