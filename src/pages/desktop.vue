@@ -32,6 +32,8 @@
         />
       </Transition>
     </ul>
+
+    <AudioPlayer />
     <div v-if="isFullPhotoDisplayed" class="desktop-page__photo">
       <img :src="fullPhotoSrc" alt="Full Photo" class="desktop-page__photo-img" />
     </div>
@@ -46,6 +48,7 @@ import Bio from '@/shared/IconItem/Bio.vue'
 import Resume from '@/shared/Resume.vue'
 import ImageFolder from '@/shared/IconItem/ImageFolder.vue'
 import PhotoGallery from '@/shared/PhotoGallery.vue'
+import AudioPlayer from '@/shared/AudioPlayer.vue'
 const blocksCoordinates = reactive({})
 
 const isFullPhotoDisplayed = ref(false)
@@ -262,6 +265,10 @@ $columnGap: v-bind(columnGap);
 $topCoord: v-bind(topCoord);
 $leftCoord: v-bind(leftCoord);
 
+.audio {
+  position: absolute;
+  top: 20px;
+}
 .desktop {
   &-page {
     width: 100%;
