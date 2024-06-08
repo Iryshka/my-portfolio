@@ -32,11 +32,20 @@
         />
       </Transition>
     </ul>
-
-    <AudioPlayer />
+    <Transition name="bounce">
+      <MusicGallery
+        v-if="isMusicGalleryDisplayed"
+        @onClick="closeMusicGallery"
+        @dblclick="openAudioPlayer"
+        class="music-gallery"
+      />
+    </Transition>
     <div v-if="isFullPhotoDisplayed" class="desktop-page__photo">
       <img :src="fullPhotoSrc" alt="Full Photo" class="desktop-page__photo-img" />
     </div>
+    <Transition name="bounce">
+      <AudioPlayer v-if="isAudioPlayerDisplayed" @onClick="closeAudioPlayer" class="audio-player" />
+    </Transition>
   </div>
 </template>
 <script setup>
@@ -49,9 +58,12 @@ import Resume from '@/shared/Resume.vue'
 import ImageFolder from '@/shared/IconItem/ImageFolder.vue'
 import PhotoGallery from '@/shared/PhotoGallery.vue'
 import AudioPlayer from '@/shared/AudioPlayer.vue'
+import MusicGallery from '@/shared/MusicGallery.vue'
 const blocksCoordinates = reactive({})
 
 const isFullPhotoDisplayed = ref(false)
+const isAudioPlayerDisplayed = ref(true)
+const isMusicGalleryDisplayed = ref(true)
 const isBioDisplayed = ref(false)
 const isPhotoGalleryDisplayed = ref(false)
 const isOptionsDisplayed = ref(false)
@@ -131,8 +143,20 @@ function openPhotoGallery() {
   console.log('photogallery clicked')
 }
 
+function openAudioPlayer() {
+  isAudioPlayerDisplayed.value = true
+}
+
 function closePhotoGallery() {
   isPhotoGalleryDisplayed.value = false
+}
+
+function closeAudioPlayer() {
+  isAudioPlayerDisplayed.value = false
+}
+
+function closeMusicGallery() {
+  isMusicGalleryDisplayed.value = false
 }
 
 const fullPhotoSrc = ref('')
@@ -265,9 +289,14 @@ $columnGap: v-bind(columnGap);
 $topCoord: v-bind(topCoord);
 $leftCoord: v-bind(leftCoord);
 
-.audio {
+.audio-player {
   position: absolute;
-  top: 20px;
+  top: -20px;
+}
+
+.music-gallery {
+  position: absolute;
+  top: 190px;
 }
 .desktop {
   &-page {
