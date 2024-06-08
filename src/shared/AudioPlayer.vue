@@ -60,12 +60,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, defineProps, onMounted, onBeforeUnmount, watch } from 'vue'
 import WaveSurfer from 'wavesurfer.js'
 
 const wavesurfer = ref(null)
 const isPlaying = ref(false)
 const isClicked = ref(false)
+
+const props = defineProps({
+  initialTrack: Object
+})
+
 const trackList = [
   {
     band: 'Kavinsky',

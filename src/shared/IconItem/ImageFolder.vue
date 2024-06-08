@@ -53,15 +53,7 @@
     </svg>
   </div>
 </template>
-<script>
-// import { VueDraggableDirective } from 'vue-draggable'
-//
-// export default {
-//   directives: {
-//     dragAndDrop: VueDraggableDirective
-//   }
-// }
-</script>
+<script></script>
 <style scoped lang="scss">
 .image {
   display: flex;

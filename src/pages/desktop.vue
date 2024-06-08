@@ -20,6 +20,7 @@
         ><File v-if="files[index]">I'm file</File>
         <Resume @dblclick="openResume" v-if="index === 0" class="resume" />
         <ImageFolder @dblclick="openPhotoGallery" v-if="index === Number(imageFolderIndex)" />
+        <!--        <MusicFolder @dblclick="openMusicGallery" />-->
       </BlockComponent>
       <Transition name="bounce">
         <Bio @onClick="closeBio" class="bio" v-if="isBioDisplayed" />
@@ -44,7 +45,13 @@
       <img :src="fullPhotoSrc" alt="Full Photo" class="desktop-page__photo-img" />
     </div>
     <Transition name="bounce">
-      <AudioPlayer v-if="isAudioPlayerDisplayed" @onClick="closeAudioPlayer" class="audio-player" />
+      <AudioPlayer
+        v-if="isAudioPlayerDisplayed"
+        :initialTrack="selectedTrack"
+        @onTrackClick="openAudioPlayer(track)"
+        @onClick="closeAudioPlayer"
+        class="audio-player"
+      />
     </Transition>
   </div>
 </template>
@@ -59,16 +66,18 @@ import ImageFolder from '@/shared/IconItem/ImageFolder.vue'
 import PhotoGallery from '@/shared/PhotoGallery.vue'
 import AudioPlayer from '@/shared/AudioPlayer.vue'
 import MusicGallery from '@/shared/MusicGallery.vue'
+import MusicFolder from '@/shared/IconItem/MusicFolder.vue'
 const blocksCoordinates = reactive({})
 
 const isFullPhotoDisplayed = ref(false)
 const isAudioPlayerDisplayed = ref(true)
-const isMusicGalleryDisplayed = ref(true)
+const isMusicGalleryDisplayed = ref(false)
 const isBioDisplayed = ref(false)
 const isPhotoGalleryDisplayed = ref(false)
 const isOptionsDisplayed = ref(false)
 
 const desktopPage = ref(null)
+const selectedTrack = ref(null)
 
 const numberOfBlocksInWidth = ref(0)
 const numberOfBlocksInHeight = ref(0)
@@ -143,8 +152,13 @@ function openPhotoGallery() {
   console.log('photogallery clicked')
 }
 
-function openAudioPlayer() {
+function openAudioPlayer(track) {
+  selectedTrack.value = track
   isAudioPlayerDisplayed.value = true
+}
+
+function openMusicGallery() {
+  isMusicGalleryDisplayed.value = true
 }
 
 function closePhotoGallery() {

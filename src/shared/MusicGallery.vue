@@ -12,7 +12,7 @@
       <div class="music__wrapper">
         <div v-for="(track, index) in trackList" :key="index" class="music__image">
           <img
-            @click="$emit('onTrackClick', track)"
+            @dblclick="$emit('onTrackClick', track)"
             src="../assets/images/desktop-icons/music-file.svg"
             alt=""
             class="music__img"
