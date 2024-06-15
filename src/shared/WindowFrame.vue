@@ -10,6 +10,8 @@
         <img src="../assets/images/close.svg" alt="" class="photo__close-img" />
       </div>
     </div>
+
+    <slot />
   </div>
 </template>
 

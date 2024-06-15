@@ -1,15 +1,5 @@
 <template>
   <div class="player">
-    <div class="player__top-line">
-      <div class="player__dots">
-        <span class="player__dot"></span>
-        <span class="player__dot"></span>
-        <span class="player__dot"></span>
-      </div>
-      <div @click="$emit('onClick')" class="player__close">
-        <img src="../assets/images/close.svg" alt="" class="player__close-img" />
-      </div>
-    </div>
     <div class="player__wrapper">
       <div class="player__image">
         <img
@@ -68,9 +58,21 @@ const isPlaying = ref(false)
 const isClicked = ref(false)
 
 const props = defineProps({
-  initialTrack: Object
+  selectedTrack: {
+    type: Object,
+    required: true
+  }
 })
 
+watch(
+  () => props.selectedTrack,
+  (newTrack, oldTrack) => {
+    if (newTrack && newTrack.src !== wavesurfer.value.getSrc()) {
+      wavesurfer.value.load(newTrack.src)
+      currentTrack.value = trackList.findIndex((track) => track.src === newTrack.src)
+    }
+  }
+)
 const trackList = [
   {
     band: 'Kavinsky',

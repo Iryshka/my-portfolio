@@ -1,31 +1,24 @@
 <template>
-  <div class="music">
-    <div class="music__top-line">
-      <div class="music__dots">
-        <span class="music__dot"></span>
-        <span class="music__dot"></span>
-        <span class="music__dot"></span>
-      </div>
-      <div @click="$emit('onClick')" class="music__close">
-        <img src="../assets/images/close.svg" alt="" class="music__close-img" />
-      </div>
-      <div class="music__wrapper">
-        <div v-for="(track, index) in trackList" :key="index" class="music__image">
-          <img
-            @dblclick="$emit('onTrackClick', track)"
-            src="../assets/images/desktop-icons/music-file.svg"
-            alt=""
-            class="music__img"
-          />
-          <p class="music__band">{{ track.band }}</p>
-          <p class="music__title">{{ track.title }}</p>
-        </div>
+  <WindowFrame>
+    <div class="music__wrapper">
+      <div v-for="(track, index) in trackList" :key="index" class="music__image">
+        <img
+          @dblclick="handleTrackClick(track)"
+          src="../assets/images/desktop-icons/music-file.svg"
+          alt=""
+          class="music__img"
+        />
+        <p class="music__band">{{ track.band }}</p>
+        <p class="music__title">{{ track.title }}</p>
       </div>
     </div>
-  </div>
+  </WindowFrame>
 </template>
 
 <script setup>
+import { defineEmits } from 'vue'
+import WindowFrame from '@/shared/WindowFrame.vue'
+
 const trackList = [
   {
     band: 'Kavinsky',
@@ -46,6 +39,12 @@ const trackList = [
     src: 'src/assets/audio/getlucky.mp3'
   }
 ]
+
+const emits = defineEmits(['onTrackClick', 'onClick'])
+
+function handleTrackClick(track) {
+  emits('onTrackClick', track)
+}
 </script>
 <style lang="scss" scoped>
 .music {

@@ -1,16 +1,5 @@
 <template>
-  <div class="bio">
-    <div class="bio__top-line">
-      <div class="bio__dots">
-        <span class="bio__dot"></span>
-        <span class="bio__dot"></span>
-        <span class="bio__dot"></span>
-      </div>
-      <div @click="$emit('onClick')" class="bio__close">
-        <img src="../../assets/images/close.svg" alt="" class="bio__close-img" />
-      </div>
-    </div>
-
+  <WindowFrame>
     <div class="bio__info">
       <img src="@/assets/images/bio-photo.jfif" class="bio__img" alt="" />
       <article class="bio__text">
@@ -44,9 +33,10 @@
         </a>
       </div>
     </aside>
-  </div>
+  </WindowFrame>
 </template>
 <script setup>
+import WindowFrame from '@/shared/WindowFrame.vue'
 import AnimatedText from '@/shared/IconItem/ui/AnimatedText.vue'
 </script>
 <style scoped lang="scss">

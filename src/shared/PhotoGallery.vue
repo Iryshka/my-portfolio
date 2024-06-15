@@ -1,30 +1,21 @@
 <template>
-  <div class="photo">
-    <div class="photo__top-line">
-      <div class="photo__dots">
-        <span class="photo__dot"></span>
-        <span class="photo__dot"></span>
-        <span class="photo__dot"></span>
-      </div>
-      <div @click="$emit('onClick')" class="photo__close">
-        <img src="../assets/images/close.svg" alt="" class="photo__close-img" />
-      </div>
-      <div class="photo__wrapper">
-        <div
-          @click="handleImageClick(image)"
-          v-for="(image, index) in images"
-          :key="index"
-          :class="['photo__image', { 'photo__image--border': index % 2 === 1 }]"
-        >
-          <img :src="image.src" alt="" class="photo__img" />
-        </div>
+  <WindowFrame>
+    <div class="photo__wrapper">
+      <div
+        @click="handleImageClick(image)"
+        v-for="(image, index) in images"
+        :key="index"
+        :class="['photo__image', { 'photo__image--border': index % 2 === 1 }]"
+      >
+        <img :src="image.src" alt="" class="photo__img" />
       </div>
     </div>
-  </div>
+  </WindowFrame>
 </template>
 
 <script setup>
 import { ref, defineEmits } from 'vue'
+import WindowFrame from '@/shared/WindowFrame.vue'
 
 const images = ref([
   { src: 'src/assets/images/image1.jpg' },
@@ -40,12 +31,6 @@ const emit = defineEmits(['onImageClick'])
 function handleImageClick(image) {
   emit('onImageClick', image.src)
 }
-
-// const isLarge = ref([false, false, false])
-//
-// function toggleImageSize(index) {
-//   isLarge.value[index] = !isLarge.value[index]
-// }
 </script>
 <style lang="scss" scoped>
 .photo {

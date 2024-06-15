@@ -20,7 +20,7 @@
         ><File v-if="files[index]">I'm file</File>
         <Resume @dblclick="openResume" v-if="index === 0" class="resume" />
         <ImageFolder @dblclick="openPhotoGallery" v-if="index === Number(imageFolderIndex)" />
-        <!--        <MusicFolder @dblclick="openMusicGallery" />-->
+        <MusicFolder @dblclick="openMusicGallery" v-if="index === Number(musicFolderIndex)" />
       </BlockComponent>
       <Transition name="bounce">
         <Bio @onClick="closeBio" class="bio" v-if="isBioDisplayed" />
@@ -37,7 +37,7 @@
       <MusicGallery
         v-if="isMusicGalleryDisplayed"
         @onClick="closeMusicGallery"
-        @dblclick="openAudioPlayer"
+        @onTrackClick="openAudioPlayer"
         class="music-gallery"
       />
     </Transition>
@@ -47,8 +47,7 @@
     <Transition name="bounce">
       <AudioPlayer
         v-if="isAudioPlayerDisplayed"
-        :initialTrack="selectedTrack"
-        @onTrackClick="openAudioPlayer(track)"
+        :selectedTrack="selectedTrack"
         @onClick="closeAudioPlayer"
         class="audio-player"
       />
@@ -70,7 +69,7 @@ import MusicFolder from '@/shared/IconItem/MusicFolder.vue'
 const blocksCoordinates = reactive({})
 
 const isFullPhotoDisplayed = ref(false)
-const isAudioPlayerDisplayed = ref(true)
+const isAudioPlayerDisplayed = ref(false)
 const isMusicGalleryDisplayed = ref(false)
 const isBioDisplayed = ref(false)
 const isPhotoGalleryDisplayed = ref(false)
@@ -100,6 +99,7 @@ let fileCreated = 0
 
 const currentIndex = ref(null)
 const imageFolderIndex = ref(null)
+const musicFolderIndex = ref(null)
 
 function changeCoordinates({ index, top, left }) {
   blocksCoordinates[index] = { top, left }
@@ -107,7 +107,9 @@ function changeCoordinates({ index, top, left }) {
 
 watch(blocksCoordinates, (newValue, oldValue) => {
   if (newValue) {
-    imageFolderIndex.value = findNearestBottom(0)
+    const folderIndexesList = findNearestBottom(0)
+    imageFolderIndex.value = folderIndexesList[0]
+    musicFolderIndex.value = folderIndexesList[1]
     console.log(findNearestBottom(0))
   }
 })
@@ -137,8 +139,10 @@ function findNearestBottom(currentIndex) {
     (item) => item.left === currentElementLeftPosition && item.top > currentElementTopPosition
   )
   const sortedVerticalBlocks = verticalBlocks.sort((previous, next) => previous.top - next.top)
-  const nearestBottomBlock = sortedVerticalBlocks[0]
-  return nearestBottomBlock.index
+  console.log(sortedVerticalBlocks)
+  return sortedVerticalBlocks.map(({ index }) => Number(index))
+  // const nearestBottomBlock = sortedVerticalBlocks[0]
+  // return nearestBottomBlock.index
   // find first element with the same left and nearest top
 }
 
@@ -328,16 +332,13 @@ $leftCoord: v-bind(leftCoord);
     height: 100%;
   }
 
-  &-page__file {
-  }
-
   &-page__photo {
     width: 350px;
     height: 400px;
     border: 6px solid deeppink;
     position: absolute;
     top: 50px;
-    left: 400px;
+    left: 50px;
   }
 
   &-page__photo-img {
