@@ -1,5 +1,5 @@
 <template>
-  <div class="player">
+  <WindowFrame :width="'400px'" :height="'200px'">
     <div class="player__wrapper">
       <div class="player__image">
         <img
@@ -45,13 +45,14 @@
           />
         </div>
       </div>
-    </div>
-  </div>
+    </div> </WindowFrame
+  >>
 </template>
 
 <script setup>
-import { ref, defineProps, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, defineProps, onBeforeUnmount, watch, onMounted } from 'vue'
 import WaveSurfer from 'wavesurfer.js'
+import WindowFrame from '@/shared/WindowFrame.vue'
 
 const wavesurfer = ref(null)
 const isPlaying = ref(false)

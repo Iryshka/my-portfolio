@@ -2,7 +2,7 @@
   <WindowFrame>
     <div class="photo__wrapper">
       <div
-        @click="handleImageClick(image)"
+        @dblclick="showFullPhoto"
         v-for="(image, index) in images"
         :key="index"
         :class="['photo__image', { 'photo__image--border': index % 2 === 1 }]"
@@ -28,7 +28,7 @@ const images = ref([
 
 const emit = defineEmits(['onImageClick'])
 
-function handleImageClick(image) {
+function showFullPhoto(image) {
   emit('onImageClick', image.src)
 }
 </script>

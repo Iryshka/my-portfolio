@@ -1,5 +1,5 @@
 <template>
-  <div class="photo">
+  <div class="photo" :style="frameStyles">
     <div class="photo__top-line">
       <div class="photo__dots">
         <span class="photo__dot"></span>
@@ -15,25 +15,50 @@
   </div>
 </template>
 
-<script setup></script>
-<style lang="scss" scoped>
-.photo {
-  position: fixed;
-  //background-color: #282828;
-  background: linear-gradient(
+<script setup>
+import { defineProps, computed } from 'vue'
+
+const props = defineProps({
+  width: {
+    type: String,
+    default: '600px'
+  },
+  height: {
+    type: String,
+    default: '440px'
+  },
+  backgroundGradient: {
+    type: String,
+    default: `linear-gradient(
       177deg,
       rgba(2, 0, 36, 0.5) 0%,
       rgba(2, 2, 6, 0.9) 75%,
-      rgba(219, 14, 208, 0.5) 100%
-    ),
-    url('../assets/images/retro-bg.jpg');
+      rgba(219, 14, 208, 0.5) 100%)`
+  },
+  backgroundImage: {
+    type: String,
+    default: 'src/assets/images/retro-bg.jpg'
+  }
+})
+
+const frameStyles = computed(() => ({
+  width: props.width,
+  height: props.height,
+  backgroundGradient: props.backgroundGradient,
+  backgroundImage: props.backgroundImage
+}))
+</script>
+
+<style lang="scss" scoped>
+.photo {
+  background-image: url('../assets/images/retro-bg.jpg');
+  position: fixed;
+  top: 40px;
   background-size: cover;
   margin: 10px;
   border: 5px solid #e54ee2ff;
   border-top-width: 30px;
   box-shadow: 7px 10px 0 0 rgba(35, 29, 29, 100);
-  width: 600px;
-  height: 440px;
   max-width: 600px;
   max-height: 440px;
 

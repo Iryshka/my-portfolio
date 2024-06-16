@@ -44,6 +44,7 @@
     <div v-if="isFullPhotoDisplayed" class="desktop-page__photo">
       <img :src="fullPhotoSrc" alt="Full Photo" class="desktop-page__photo-img" />
     </div>
+    <!--    <FullPhoto />-->
     <Transition name="bounce">
       <AudioPlayer
         v-if="isAudioPlayerDisplayed"
@@ -66,6 +67,7 @@ import PhotoGallery from '@/shared/PhotoGallery.vue'
 import AudioPlayer from '@/shared/AudioPlayer.vue'
 import MusicGallery from '@/shared/MusicGallery.vue'
 import MusicFolder from '@/shared/IconItem/MusicFolder.vue'
+import FullPhoto from '@/shared/IconItem/FullPhoto.vue'
 const blocksCoordinates = reactive({})
 
 const isFullPhotoDisplayed = ref(false)

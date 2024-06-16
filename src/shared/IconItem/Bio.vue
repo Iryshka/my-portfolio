@@ -1,5 +1,5 @@
 <template>
-  <WindowFrame>
+  <WindowFrame :backgroundGradient="backgroundGradient">
     <div class="bio__info">
       <img src="@/assets/images/bio-photo.jfif" class="bio__img" alt="" />
       <article class="bio__text">
@@ -36,19 +36,25 @@
   </WindowFrame>
 </template>
 <script setup>
+import { ref } from 'vue'
 import WindowFrame from '@/shared/WindowFrame.vue'
 import AnimatedText from '@/shared/IconItem/ui/AnimatedText.vue'
+
+const backgroundGradient = ref(`linear-gradient(
+   177deg,
+   rgba(2, 0, 36, 0.5) 0%,
+   rgba(2, 2, 6, 0.9) 75%,
+   rgba(219, 14, 208, 0.5) 100%`)
 </script>
 <style scoped lang="scss">
 .bio {
-  background: linear-gradient(
-      177deg,
-      rgba(2, 0, 36, 0.5) 0%,
-      rgba(2, 2, 6, 0.9) 75%,
-      rgba(219, 14, 208, 0.5) 100%
-    ),
-    url('../../assets/images/retro-bg2.jpg');
-  //background-image: url('../../assets/images/retro-bg2.jpg');
+  //background: linear-gradient(
+  //    177deg,
+  //    rgba(2, 0, 36, 0.5) 0%,
+  //    rgba(2, 2, 6, 0.9) 75%,
+  //    rgba(219, 14, 208, 0.5) 100%
+  //  ),
+  //  url('../../assets/images/retro-bg2.jpg');
 
   background-size: cover;
   position: fixed;
