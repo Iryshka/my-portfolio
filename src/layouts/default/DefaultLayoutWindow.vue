@@ -9,13 +9,17 @@
 <style scoped lang="scss">
 .innerwindow {
   position: relative;
-  width: 85%;
+  width: 95%;
   border: 10px solid rgb(229, 78, 226);
   //background-color: rgba(0, 0, 0, 80%);
   background-color: #5efc8d;
-  height: 90dvh;
+  height: 95dvh;
   font-size: 20px;
 
+  @include breakpoints-up(small) {
+    width: 85%;
+    height: 90dvh;
+  }
   .date {
     position: absolute;
     top: -7px;

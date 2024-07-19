@@ -21,7 +21,11 @@
         <Resume @dblclick="openResume" v-if="index === 0" class="resume" />
         <ImageFolder @dblclick="openPhotoGallery" v-if="index === Number(imageFolderIndex)" />
         <MusicFolder @dblclick="openMusicGallery" v-if="index === Number(musicFolderIndex)" />
+        <CvFolder @dblclick="openCV" v-if="index === Number(cvFolderIndex)" />
       </BlockComponent>
+      <Transition name="bounce">
+        <Cv v-if="isCvDisplayed" @onClick="closeCV" />
+      </Transition>
       <Transition name="bounce">
         <Bio @onClick="closeBio" class="bio" v-if="isBioDisplayed" />
       </Transition>
@@ -44,7 +48,6 @@
     <div v-if="isFullPhotoDisplayed" class="desktop-page__photo">
       <img :src="fullPhotoSrc" alt="Full Photo" class="desktop-page__photo-img" />
     </div>
-    <!--    <FullPhoto />-->
     <Transition name="bounce">
       <AudioPlayer
         v-if="isAudioPlayerDisplayed"
@@ -57,6 +60,7 @@
 </template>
 <script setup>
 import { ref, reactive, computed, onMounted, watch } from 'vue'
+import { saveAs } from 'file-saver'
 import TheOptions from '@/shared/TheOptions.vue'
 import File from '@/shared/IconItem/File.vue'
 import BlockComponent from '@/components/Block/BlockComponent.vue'
@@ -67,12 +71,15 @@ import PhotoGallery from '@/shared/PhotoGallery.vue'
 import AudioPlayer from '@/shared/AudioPlayer.vue'
 import MusicGallery from '@/shared/MusicGallery.vue'
 import MusicFolder from '@/shared/IconItem/MusicFolder.vue'
-import FullPhoto from '@/shared/IconItem/FullPhoto.vue'
+import Cv from '@/shared/IconItem/Cv.vue'
+import CvFolder from '@/shared/IconItem/CvFolder.vue'
+
 const blocksCoordinates = reactive({})
 
 const isFullPhotoDisplayed = ref(false)
 const isAudioPlayerDisplayed = ref(false)
 const isMusicGalleryDisplayed = ref(false)
+const isCvDisplayed = ref(true)
 const isBioDisplayed = ref(false)
 const isPhotoGalleryDisplayed = ref(false)
 const isOptionsDisplayed = ref(false)
@@ -102,6 +109,7 @@ let fileCreated = 0
 const currentIndex = ref(null)
 const imageFolderIndex = ref(null)
 const musicFolderIndex = ref(null)
+const cvFolderIndex = ref(null)
 
 function changeCoordinates({ index, top, left }) {
   blocksCoordinates[index] = { top, left }
@@ -112,6 +120,7 @@ watch(blocksCoordinates, (newValue, oldValue) => {
     const folderIndexesList = findNearestBottom(0)
     imageFolderIndex.value = folderIndexesList[0]
     musicFolderIndex.value = folderIndexesList[1]
+    cvFolderIndex.value = folderIndexesList[2]
     console.log(findNearestBottom(0))
   }
 })
@@ -121,15 +130,11 @@ watch(files, (newValue, oldValue) => {
 })
 
 function findNearestBottom(currentIndex) {
-  // console.log(blocksCoordinates)
   // First find current element from grouped blockCoordinates
   // get current top coordinate from currentElement
   const currentElement = blocksCoordinates[currentIndex]
   const currentElementTopPosition = currentElement.top
   const currentElementLeftPosition = currentElement.left
-
-  // make an array from blockCoordinates with structure [{index, top, left}]
-  // use Object.entries method https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 
   const coordinatesList = Object.entries(blocksCoordinates).map((item) => {
     const itemIndex = item[0]
@@ -167,6 +172,41 @@ function openMusicGallery() {
   isMusicGalleryDisplayed.value = true
 }
 
+function openCV() {
+  isCvDisplayed.value = true
+}
+
+async function downloadDocx(url = 'https://morth.nic.in/sites/default/files/dd12-13_0.pdf') {
+  const response = await fetch(url)
+  const blob = await response.blob()
+  const newBlob = new Blob([blob], { type: 'application/pdf' })
+  console.log('response', response, blob, newBlob)
+  saveAs(newBlob, `test.pdf`)
+}
+
+// async function getFile(
+//   url = 'https://file-examples.com/wp-content/storage/2017/02/file-sample_100kB.docx'
+// ) {
+//   const request = new Request(url)
+//   const response = await fetch(request)
+//   const blob = await response.blob()
+//   console.log(blob, "i'm blob")
+//   const objectURL = URL.createObjectURL(blob)
+//   const a = document.createElement('a')
+//   a.setAttribute('href', objectURL)
+//   a.setAttribute('download', `${new Date().toISOString()}.docx`)
+//   document.body.appendChild(a)
+//   a.click()
+//   document.body.removeChild(a)
+//   URL.revokeObjectURL(objectURL)
+// }
+// function downloadCV() {
+//   const link = document.createElement('a')
+//   link.href = 'https://file-examples.com/wp-content/storage/2017/02/file-sample_100kB.docx'
+//   link.download = 'MyCv.docx'
+//   link.click()
+// }
+
 function closePhotoGallery() {
   isPhotoGalleryDisplayed.value = false
 }
@@ -176,7 +216,12 @@ function closeAudioPlayer() {
 }
 
 function closeMusicGallery() {
+  console.log('closing music gallery')
   isMusicGalleryDisplayed.value = false
+}
+
+function closeCV() {
+  isCvDisplayed.value = false
 }
 
 const fullPhotoSrc = ref('')

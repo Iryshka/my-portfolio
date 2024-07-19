@@ -45,8 +45,8 @@
           />
         </div>
       </div>
-    </div> </WindowFrame
-  >>
+    </div>
+  </WindowFrame>
 </template>
 
 <script setup>
@@ -143,8 +143,9 @@ onMounted(() => {
     wavesurfer.value.on('ready', () => {
       wavesurfer.value.play()
     })
-
+    currentTrack.value = trackList.findIndex((track) => track.src === props.selectedTrack.src)
     wavesurfer.value.load(trackList[currentTrack.value].src)
+    console.log(props.selectedTrack, 'current track is')
     console.log('WaveSurfer initialized successfully')
   } catch (error) {
     console.error('WaveSurfer initialization error:', error)

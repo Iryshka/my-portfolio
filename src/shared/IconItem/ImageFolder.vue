@@ -62,7 +62,7 @@
   flex-direction: column;
   margin-top: 5px;
   &__title {
-    margin-top: -10px;
+    margin-top: -15px;
 
     font-size: 14px;
     color: black;

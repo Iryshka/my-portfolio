@@ -1,5 +1,5 @@
 <template>
-  <div class="photo" :style="frameStyles">
+  <div class="photo">
     <div class="photo__top-line">
       <div class="photo__dots">
         <span class="photo__dot"></span>
@@ -15,52 +15,32 @@
   </div>
 </template>
 
-<script setup>
-import { defineProps, computed } from 'vue'
-
-const props = defineProps({
-  width: {
-    type: String,
-    default: '600px'
-  },
-  height: {
-    type: String,
-    default: '440px'
-  },
-  backgroundGradient: {
-    type: String,
-    default: `linear-gradient(
-      177deg,
-      rgba(2, 0, 36, 0.5) 0%,
-      rgba(2, 2, 6, 0.9) 75%,
-      rgba(219, 14, 208, 0.5) 100%)`
-  },
-  backgroundImage: {
-    type: String,
-    default: 'src/assets/images/retro-bg.jpg'
-  }
-})
-
-const frameStyles = computed(() => ({
-  width: props.width,
-  height: props.height,
-  backgroundGradient: props.backgroundGradient,
-  backgroundImage: props.backgroundImage
-}))
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 .photo {
   background-image: url('../assets/images/retro-bg.jpg');
-  position: fixed;
-  top: 40px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
   background-size: cover;
   margin: 10px;
   border: 5px solid #e54ee2ff;
   border-top-width: 30px;
   box-shadow: 7px 10px 0 0 rgba(35, 29, 29, 100);
-  max-width: 600px;
-  max-height: 440px;
+  //width: 100%;
+  min-width: 320px;
+  max-width: min(90vw, 660px);
+  min-height: 840px;
+  // когда появляется скрол, исчезает верхняя панель
+  //overflow: scroll;
+
+  @include breakpoints-up(small) {
+    top: 50px;
+    left: auto;
+    min-width: 620px;
+    min-height: 940px;
+  }
 
   &__wrapper {
     display: flex;
@@ -74,7 +54,7 @@ const frameStyles = computed(() => ({
   &__image {
     width: 170px;
     height: 170px;
-    overflow: hidden;
+    //overflow: hidden;
     box-sizing: border-box;
     border: 5px solid greenyellow;
 
@@ -118,9 +98,5 @@ const frameStyles = computed(() => ({
     border: 3px solid #231d1d;
     border-radius: 50%;
   }
-
-  //&:hover {
-  //  cursor: url('../assets/images/hand-cursor3.svg'), auto;
-  //}
 }
 </style>

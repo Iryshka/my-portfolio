@@ -72,9 +72,9 @@
   align-items: center;
   flex-direction: column;
   margin-top: 5px;
-  &__title {
-    margin-top: -10px;
 
+  &__title {
+    margin-top: -5px;
     font-size: 14px;
     color: black;
     font-weight: bold;

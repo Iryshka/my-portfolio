@@ -40,7 +40,7 @@ const trackList = [
   }
 ]
 
-const emits = defineEmits(['onTrackClick', 'onClick'])
+const emits = defineEmits(['onTrackClick'])
 
 function handleTrackClick(track) {
   emits('onTrackClick', track)

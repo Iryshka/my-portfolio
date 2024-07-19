@@ -1,5 +1,5 @@
 <template>
-  <WindowFrame :backgroundGradient="backgroundGradient">
+  <WindowFrame>
     <div class="bio__info">
       <img src="@/assets/images/bio-photo.jfif" class="bio__img" alt="" />
       <article class="bio__text">
@@ -56,37 +56,11 @@ const backgroundGradient = ref(`linear-gradient(
   //  ),
   //  url('../../assets/images/retro-bg2.jpg');
 
-  background-size: cover;
-  position: fixed;
-  margin: 10px;
-  border: 5px solid #e54ee2ff;
-  border-top-width: 30px;
-  //background-color: #231d1d;
-  box-shadow: 7px 10px 0 0 rgba(35, 29, 29, 100);
-  max-width: 600px;
-  max-height: 440px;
-
   &__close-img {
     position: absolute;
     top: -30px;
     right: -9px;
     padding: 5px;
-  }
-
-  &__dots {
-    width: 100%;
-    position: absolute;
-    top: -23px;
-    display: flex;
-    gap: 5px;
-  }
-
-  &__dot {
-    width: 15px;
-    height: 15px;
-    background-color: #e54ee2ff;
-    border: 3px solid #231d1d;
-    border-radius: 50%;
   }
 
   &__img {
@@ -101,17 +75,20 @@ const backgroundGradient = ref(`linear-gradient(
     line-height: 1.5;
     color: #e0d4d4;
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     align-items: center;
     gap: 45px;
     margin: 35px;
+
+    @include breakpoints-up(small) {
+      flex-direction: row;
+    }
   }
 
   &__text {
     display: flex;
     flex-direction: column;
     gap: 10px;
-
     width: 100%;
   }
 
@@ -123,9 +100,14 @@ const backgroundGradient = ref(`linear-gradient(
 
   &__links {
     display: flex;
-    flex-direction: row;
-    gap: 70px;
+    flex-direction: column;
+    gap: 10px;
     margin: 0 0 10px 30px;
+
+    @include breakpoints-up(small) {
+      flex-direction: row;
+      gap: 70px;
+    }
   }
 
   &__social-img {
