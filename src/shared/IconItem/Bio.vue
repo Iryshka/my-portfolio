@@ -48,14 +48,6 @@ const backgroundGradient = ref(`linear-gradient(
 </script>
 <style scoped lang="scss">
 .bio {
-  //background: linear-gradient(
-  //    177deg,
-  //    rgba(2, 0, 36, 0.5) 0%,
-  //    rgba(2, 2, 6, 0.9) 75%,
-  //    rgba(219, 14, 208, 0.5) 100%
-  //  ),
-  //  url('../../assets/images/retro-bg2.jpg');
-
   &__close-img {
     position: absolute;
     top: -30px;
@@ -78,10 +70,11 @@ const backgroundGradient = ref(`linear-gradient(
     flex-direction: column-reverse;
     align-items: center;
     gap: 45px;
-    margin: 35px;
+    margin: 25px 15px;
 
     @include breakpoints-up(small) {
       flex-direction: row;
+      margin: 25px;
     }
   }
 
@@ -113,7 +106,7 @@ const backgroundGradient = ref(`linear-gradient(
   &__social-img {
     width: 25px;
     height: 25px;
-    z-index: 2;
+    z-index: 0;
   }
 
   &__link {

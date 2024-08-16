@@ -17,8 +17,10 @@
         :blocks-coordinates="blocksCoordinates"
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
-        ><File v-if="files[index]">I'm file</File>
+        ><File @onFileClick="openTextEditor" :index="index" v-if="files[index]">I'm file</File>
         <Resume @dblclick="openResume" v-if="index === 0" class="resume" />
+        <Draggable v-if="index === draggablePositionIndex" />
+        <DropZone @onDropElement="dropElement" v-if="index === 27" />
         <ImageFolder @dblclick="openPhotoGallery" v-if="index === Number(imageFolderIndex)" />
         <MusicFolder @dblclick="openMusicGallery" v-if="index === Number(musicFolderIndex)" />
         <CvFolder @dblclick="openCV" v-if="index === Number(cvFolderIndex)" />
@@ -32,9 +34,12 @@
       <Transition name="bounce">
         <PhotoGallery
           @onClick="closePhotoGallery"
-          @onImageClick="showFullPhoto"
+          @onImageClick="openFullPhoto"
           v-if="isPhotoGalleryDisplayed"
         />
+      </Transition>
+      <Transition name="bounce">
+        <TextEditor @onClick="closeTextEditor" v-if="isTextEditorDisplayed" class="text-editor" />
       </Transition>
     </ul>
     <Transition name="bounce">
@@ -45,9 +50,7 @@
         class="music-gallery"
       />
     </Transition>
-    <div v-if="isFullPhotoDisplayed" class="desktop-page__photo">
-      <img :src="fullPhotoSrc" alt="Full Photo" class="desktop-page__photo-img" />
-    </div>
+
     <Transition name="bounce">
       <AudioPlayer
         v-if="isAudioPlayerDisplayed"
@@ -56,6 +59,7 @@
         class="audio-player"
       />
     </Transition>
+    <Footer />
   </div>
 </template>
 <script setup>
@@ -73,16 +77,30 @@ import MusicGallery from '@/shared/MusicGallery.vue'
 import MusicFolder from '@/shared/IconItem/MusicFolder.vue'
 import Cv from '@/shared/IconItem/Cv.vue'
 import CvFolder from '@/shared/IconItem/CvFolder.vue'
+import FullPhoto from '@/shared/IconItem/FullPhoto.vue'
+import TextEditor from '@/shared/IconItem/TextEditor.vue'
+import Footer from '@/components/Footer.vue'
+import Draggable from '@/components/Draggable.vue'
+import DropZone from '@/components/DropZone.vue'
 
 const blocksCoordinates = reactive({})
+
+const draggablePositionIndex = ref(25)
+
+function dropElement(dropIndex) {
+  console.log({ dropIndex })
+  draggablePositionIndex.value = dropIndex
+}
 
 const isFullPhotoDisplayed = ref(false)
 const isAudioPlayerDisplayed = ref(false)
 const isMusicGalleryDisplayed = ref(false)
-const isCvDisplayed = ref(true)
+const isCvDisplayed = ref(false)
 const isBioDisplayed = ref(false)
 const isPhotoGalleryDisplayed = ref(false)
 const isOptionsDisplayed = ref(false)
+
+const isTextEditorDisplayed = ref(false)
 
 const desktopPage = ref(null)
 const selectedTrack = ref(null)
@@ -110,6 +128,7 @@ const currentIndex = ref(null)
 const imageFolderIndex = ref(null)
 const musicFolderIndex = ref(null)
 const cvFolderIndex = ref(null)
+const fullPhotoSrc = ref('')
 
 function changeCoordinates({ index, top, left }) {
   blocksCoordinates[index] = { top, left }
@@ -121,7 +140,6 @@ watch(blocksCoordinates, (newValue, oldValue) => {
     imageFolderIndex.value = folderIndexesList[0]
     musicFolderIndex.value = folderIndexesList[1]
     cvFolderIndex.value = folderIndexesList[2]
-    console.log(findNearestBottom(0))
   }
 })
 
@@ -166,10 +184,23 @@ function openPhotoGallery() {
 function openAudioPlayer(track) {
   selectedTrack.value = track
   isAudioPlayerDisplayed.value = true
+  isPlaying.value = true
 }
 
 function openMusicGallery() {
   isMusicGalleryDisplayed.value = true
+}
+
+function openTextEditor(index) {
+  if (files[index].ext === 'txt') {
+    isTextEditorDisplayed.value = true
+  }
+}
+
+function openFullPhoto(imageSrc) {
+  console.log('Opening full photo')
+  fullPhotoSrc.value = imageSrc
+  isFullPhotoDisplayed.value = true
 }
 
 function openCV() {
@@ -180,7 +211,6 @@ async function downloadDocx(url = 'https://morth.nic.in/sites/default/files/dd12
   const response = await fetch(url)
   const blob = await response.blob()
   const newBlob = new Blob([blob], { type: 'application/pdf' })
-  console.log('response', response, blob, newBlob)
   saveAs(newBlob, `test.pdf`)
 }
 
@@ -216,19 +246,15 @@ function closeAudioPlayer() {
 }
 
 function closeMusicGallery() {
-  console.log('closing music gallery')
   isMusicGalleryDisplayed.value = false
+}
+
+function closeTextEditor() {
+  isTextEditorDisplayed.value = false
 }
 
 function closeCV() {
   isCvDisplayed.value = false
-}
-
-const fullPhotoSrc = ref('')
-
-function showFullPhoto(image) {
-  fullPhotoSrc.value = image
-  isFullPhotoDisplayed.value = true
 }
 
 const closeFullPhoto = () => {
@@ -248,7 +274,6 @@ onMounted(() => {
     for (const [key, value] of Object.entries(filesObject)) {
       files[key] = value
     }
-    console.log('setting files')
   }
   console.log(localStorage.getItem('files'))
 })
@@ -265,6 +290,7 @@ function onBlock(index) {
 }
 
 function createFile() {
+  console.log('create file', currentIndex.value)
   closeSelect()
   fileCreated++
   files[currentIndex.value] = {
@@ -354,15 +380,6 @@ $columnGap: v-bind(columnGap);
 $topCoord: v-bind(topCoord);
 $leftCoord: v-bind(leftCoord);
 
-.audio-player {
-  position: absolute;
-  top: -20px;
-}
-
-.music-gallery {
-  position: absolute;
-  top: 190px;
-}
 .desktop {
   &-page {
     width: 100%;
@@ -379,14 +396,14 @@ $leftCoord: v-bind(leftCoord);
     height: 100%;
   }
 
-  &-page__photo {
-    width: 350px;
-    height: 400px;
-    border: 6px solid deeppink;
-    position: absolute;
-    top: 50px;
-    left: 50px;
-  }
+  //&-page__photo {
+  //  width: 350px;
+  //  height: 400px;
+  //  border: 6px solid deeppink;
+  //  position: absolute;
+  //  top: 50px;
+  //  left: 50px;
+  //}
 
   &-page__photo-img {
     width: 100%;

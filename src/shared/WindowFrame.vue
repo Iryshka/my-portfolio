@@ -1,70 +1,51 @@
 <template>
-  <div class="photo">
-    <div class="photo__top-line">
-      <div class="photo__dots">
-        <span class="photo__dot"></span>
-        <span class="photo__dot"></span>
-        <span class="photo__dot"></span>
+  <div class="frame">
+    <div class="frame__top-line">
+      <div class="frame__dots">
+        <span class="frame__dot"></span>
+        <span class="frame__dot"></span>
+        <span class="frame__dot"></span>
       </div>
-      <div @click="$emit('onClick')" class="photo__close">
-        <img src="../assets/images/close.svg" alt="" class="photo__close-img" />
+
+      <div @click="$emit('onClick')" class="frame__close">
+        <img src="../assets/images/close.svg" alt="" class="frame__close-img" />
       </div>
     </div>
 
-    <slot />
+    <div class="frame__content"><slot /></div>
   </div>
 </template>
 
 <script setup></script>
 
 <style lang="scss" scoped>
-.photo {
-  background-image: url('../assets/images/retro-bg.jpg');
-  position: absolute;
-  left: 10px;
-  top: 10px;
+.frame {
+  background-image: url('../assets/images/retro-bg2.jpg');
   background-size: cover;
-  margin: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
   border: 5px solid #e54ee2ff;
   border-top-width: 30px;
   box-shadow: 7px 10px 0 0 rgba(35, 29, 29, 100);
   //width: 100%;
   min-width: 320px;
   max-width: min(90vw, 660px);
-  min-height: 840px;
-  // когда появляется скрол, исчезает верхняя панель
-  //overflow: scroll;
+  height: auto;
 
   @include breakpoints-up(small) {
-    top: 50px;
     left: auto;
-    min-width: 620px;
-    min-height: 940px;
+    min-width: 520px;
   }
 
-  &__wrapper {
-    display: flex;
-    gap: 15px;
-    margin: 15px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+  &__content {
+    position: relative;
+    overflow-y: auto;
+    max-height: 90vh;
 
-  &__image {
-    width: 170px;
-    height: 170px;
-    //overflow: hidden;
-    box-sizing: border-box;
-    border: 5px solid greenyellow;
-
-    &:hover .photo__img {
-      transform: scale(1.2);
+    @include breakpoints-up(small) {
+      max-height: 85vh;
     }
-  }
-
-  &__image--border {
-    border-color: #5efc8d;
   }
 
   &__img {

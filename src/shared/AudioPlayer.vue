@@ -1,6 +1,6 @@
 <template>
-  <WindowFrame :width="'400px'" :height="'200px'">
-    <div class="player__wrapper">
+  <WindowFrame>
+    <div class="player">
       <div class="player__image">
         <img
           :src="trackList[currentTrack].image"
@@ -145,8 +145,8 @@ onMounted(() => {
     })
     currentTrack.value = trackList.findIndex((track) => track.src === props.selectedTrack.src)
     wavesurfer.value.load(trackList[currentTrack.value].src)
-    console.log(props.selectedTrack, 'current track is')
-    console.log('WaveSurfer initialized successfully')
+    // console.log(props.selectedTrack, 'current track is')
+    // console.log('WaveSurfer initialized successfully')
   } catch (error) {
     console.error('WaveSurfer initialization error:', error)
   }
@@ -161,13 +161,16 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .player {
-  background-color: #363232;
-  margin: 10px;
-  border: 5px solid #e54ee2ff;
-  border-top-width: 30px;
-  box-shadow: 7px 10px 0 0 rgba(35, 29, 29, 100);
-  height: 200px;
-  width: 400px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+
+  @include breakpoints-up(small) {
+    gap: 0;
+    padding: 0;
+  }
 
   &__image {
     width: 130px;
@@ -208,13 +211,6 @@ onBeforeUnmount(() => {
     background-color: #e54ee2ff;
     border: 3px solid #231d1d;
     border-radius: 50%;
-  }
-
-  &__wrapper {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
   }
 
   &__song-info {

@@ -30,18 +30,14 @@
           <!--            </a>-->
           <!--          </li>-->
           <li class="cv__contacts-item">
-            <a
-              href="../../assets/documents/resume.pdf"
-              download="resume.pdf"
-              class="cv__contacts-link"
-            >
+            <a href="/files/file-sample.docx" download="file-sample.docx" class="cv__contacts-link">
               <img src="../../assets/images/cv/download.svg" alt="" class="cv__contacts-img" />
               <span class="cv__contacts-name">CV</span>
             </a>
           </li>
         </ul>
 
-        <div class="cv_experience">
+        <div class="cv__experience">
           <h3 class="cv__summary">Summary</h3>
           <p class="cv__summary-description">
             I'm a Frontend Developer with 3+ years of experience, main focus on Vue JS / Nuxt JS and
@@ -94,11 +90,15 @@
             <p class="cv__list-title">JavaScript</p>
           </li>
           <li class="cv__list-item">
+            <img src="../../assets/images/cv/react.svg" alt="" class="cv__list-img" />
+            <p class="cv__list-title">React</p>
+          </li>
+          <li class="cv__list-item">
             <img src="../../assets/images/cv/vue.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Vue 2 / 3</p>
           </li>
           <li class="cv__list-item">
-            <img src="" alt="" class="cv__list-img" />
+            <img src="../../assets/images/cv/pinia.png" alt="" class="cv__list-img" />
             <p class="cv__list-title">Pinia</p>
           </li>
           <li class="cv__list-item">
@@ -108,6 +108,10 @@
           <li class="cv__list-item">
             <img src="../../assets/images/cv/ts.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">TypeScript</p>
+          </li>
+          <li class="cv__list-item">
+            <img src="../../assets/images/cv/tailwind.png" alt="" class="cv__list-img" />
+            <p class="cv__list-title">Tailwind</p>
           </li>
           <li class="cv__list-item">
             <img src="../../assets/images/cv/sass.svg" alt="" class="cv__list-img" />
@@ -133,19 +137,20 @@
 <style scoped lang="scss">
 .cv {
   font-family: 'IBM Plex Mono', serif;
-  position: absolute;
   font-size: 15px;
   line-height: 1.9;
   padding: 10px;
   color: #d5d2d2;
-
-  //@include breakpoints-up(small) {
-  //  grid-template-columns: 30% 70%;
-  //  display: grid;
-  //}
+  height: 100%;
+  background: rgba(72, 8, 150, 0.4);
 
   &__title {
     font-size: 28px;
+  }
+
+  &__work-bullet-point {
+    width: 15px;
+    background-color: #e210f1;
   }
 
   &__contacts {
@@ -163,25 +168,62 @@
     text-decoration: none;
   }
 
+  &__summary {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
   &__work {
+    font-size: 20px;
     margin-top: 20px;
 
     &-title {
+      cursor: url('../../assets/images/hand-cursor3.svg'), auto;
       color: white;
       text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s ease;
+    }
+
+    &-title:hover {
+      color: #e210f1;
     }
   }
 
   &__work-description {
+    margin-top: 15px;
     display: flex;
     align-items: flex-start;
     gap: 10px;
   }
 
+  &__add-info-title {
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+
+    @include breakpoints-up(small) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
   &__list-item {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+  }
+
+  &__list-img {
+    width: 20px;
   }
 }
 </style>

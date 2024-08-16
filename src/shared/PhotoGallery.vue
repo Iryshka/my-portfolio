@@ -1,8 +1,16 @@
 <template>
   <WindowFrame>
     <div class="photo__wrapper">
+      <Transition name="bounce">
+        <FullPhoto
+          @onClick="closeFullPhoto"
+          v-if="fullPhotoImageIndex"
+          :src="images[fullPhotoImageIndex].src"
+          class="desktop-page__photo"
+        />
+      </Transition>
       <div
-        @dblclick="showFullPhoto"
+        @dblclick="() => showFullPhoto(index)"
         v-for="(image, index) in images"
         :key="index"
         :class="['photo__image', { 'photo__image--border': index % 2 === 1 }]"
@@ -16,54 +24,47 @@
 <script setup>
 import { ref, defineEmits } from 'vue'
 import WindowFrame from '@/shared/WindowFrame.vue'
+import FullPhoto from '@/shared/IconItem/FullPhoto.vue'
 
-const images = ref([
+const fullPhotoImageIndex = ref(null)
+
+const images = [
   { src: 'src/assets/images/image1.jpg' },
   { src: 'src/assets/images/image3.jpg' },
   { src: 'src/assets/images/image5.jpg' },
   { src: 'src/assets/images/image4.jpg' },
   { src: 'src/assets/images/image2.jpg' },
   { src: 'src/assets/images/image6.jpg' }
-])
+]
 
 const emit = defineEmits(['onImageClick'])
 
-function showFullPhoto(image) {
-  emit('onImageClick', image.src)
+function showFullPhoto(imageIndex) {
+  console.log({ imageIndex })
+  fullPhotoImageIndex.value = imageIndex
+}
+
+function closeFullPhoto() {
+  fullPhotoImageIndex.value = null
 }
 </script>
 <style lang="scss" scoped>
 .photo {
-  //background: linear-gradient(
-  //    177deg,
-  //    rgba(2, 0, 36, 0.5) 0%,
-  //    rgba(2, 2, 6, 0.9) 75%,
-  //    rgba(219, 14, 208, 0.5) 100%
-  //  ),
-  //  url('../assets/images/retro-bg.jpg');
-  //background-size: cover;
-  //margin: 10px;
-  //border: 5px solid #e54ee2ff;
-  //border-top-width: 30px;
-  //box-shadow: 7px 10px 0 0 rgba(35, 29, 29, 100);
-  //min-width: 320px;
-  //height: 440px;
-  //max-width: 600px;
-  //max-height: 440px;
-
   &__wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 15px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    gap: 5px;
+    margin: 5px;
+
+    @include breakpoints-up(small) {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin: 10px;
+    }
   }
 
   &__image {
-    width: 170px;
-    height: 170px;
+    //width: 100%;
+    height: 250px;
     overflow: hidden;
 
     box-sizing: border-box;

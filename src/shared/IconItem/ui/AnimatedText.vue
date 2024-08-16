@@ -9,9 +9,10 @@
   font-family: monospace;
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   border-right: 0.15em solid orange; /* The typwriter cursor */
+  line-height: 1.2;
   white-space: nowrap; /* Keeps the content on a single line */
   /* Gives that scrolling effect as the typing happens */
-  letter-spacing: 0.15em; /* Adjust as needed */
+  letter-spacing: 0.25em; /* Adjust as needed */
   animation:
     typing 3.5s steps(30, end),
     blink-caret 0.5s step-end infinite;
@@ -34,7 +35,7 @@
     border-color: transparent;
   }
   50% {
-    border-color: orange;
+    border-color: #e210f1;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="file">
+  <div @dblclick="onFileClick" class="file">
     <svg
       width="60"
       height="60"
@@ -39,10 +39,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, defineEmits, defineProps } from 'vue'
 
 const title = ref('document')
 const isEditMode = ref(false)
+
+const props = defineProps(['index'])
+const emits = defineEmits(['onFileClick'])
+
+function onFileClick() {
+  emits('onFileClick', props.index)
+}
 function changeTitle() {
   isEditMode.value = true
 }
@@ -59,6 +66,10 @@ function exitEditMode() {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  &:hover {
+    cursor: url('../../assets/images/hand-cursor3.svg'), auto;
+  }
 
   &__title {
     font-size: 14px;

@@ -29,13 +29,18 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .date-list {
+  font-family: 'IBM Plex Mono', serif;
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  gap: 10px;
+  gap: 15px;
   list-style: none;
+  color: #282828;
+  font-size: 14px;
+  font-weight: bold;
 
-  &__item {
+  @include breakpoints-up(small) {
+    font-size: 18px;
   }
 }
 </style>

@@ -10,8 +10,8 @@
 .innerwindow {
   position: relative;
   width: 95%;
-  border: 10px solid rgb(229, 78, 226);
-  //background-color: rgba(0, 0, 0, 80%);
+  border: 10px solid #e54ee2ff;
+  border-bottom: 35px solid #e54ee2ff;
   background-color: #5efc8d;
   height: 95dvh;
   font-size: 20px;
