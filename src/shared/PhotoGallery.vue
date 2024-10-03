@@ -4,7 +4,7 @@
       <Transition name="bounce">
         <FullPhoto
           @onClick="closeFullPhoto"
-          v-if="fullPhotoImageIndex"
+          v-if="fullPhotoImageIndex !== null"
           :src="images[fullPhotoImageIndex].src"
           class="desktop-page__photo"
         />

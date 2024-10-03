@@ -1,6 +1,7 @@
 <template>
   <WindowFrame>
-    <div class="full-photo"><img :src="src" alt="Full Photo" class="full-photo__img" /></div
+    <div class="full-photo">
+      <img class="full-photo__img" :src="src" alt="Full Photo" /></div
   ></WindowFrame>
 </template>
 <script setup>
@@ -21,4 +22,10 @@ watch(
   }
 )
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.full-photo {
+  &__img {
+    width: 60vw;
+  }
+}
+</style>

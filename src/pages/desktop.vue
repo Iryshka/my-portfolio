@@ -18,12 +18,15 @@
         v-for="(block, index) in totalNumberOfBlocks"
         :key="index"
         ><File @onFileClick="openTextEditor" :index="index" v-if="files[index]">I'm file</File>
+
         <Resume @dblclick="openResume" v-if="index === 0" class="resume" />
         <Draggable v-if="index === draggablePositionIndex" />
         <DropZone @onDropElement="dropElement" v-if="index === 27" />
         <ImageFolder @dblclick="openPhotoGallery" v-if="index === Number(imageFolderIndex)" />
         <MusicFolder @dblclick="openMusicGallery" v-if="index === Number(musicFolderIndex)" />
-        <CvFolder @dblclick="openCV" v-if="index === Number(cvFolderIndex)" />
+        <Draggable v-if="index === Number(cvFolderIndex)" :current-index="cvFolderIndex">
+          <CvFolder @dblclick="openCV" v-if="index === Number(cvFolderIndex)" />
+        </Draggable>
       </BlockComponent>
       <Transition name="bounce">
         <Cv v-if="isCvDisplayed" @onClick="closeCV" />
@@ -87,8 +90,11 @@ const blocksCoordinates = reactive({})
 
 const draggablePositionIndex = ref(25)
 
-function dropElement(dropIndex) {
-  console.log({ dropIndex })
+function dropElement(dropIndex, itemID) {
+  console.log({ dropIndex, itemID }, blocksCoordinates, cvFolderIndex)
+  if (cvFolderIndex.value === Number(itemID)) {
+    cvFolderIndex.value = dropIndex
+  }
   draggablePositionIndex.value = dropIndex
 }
 
