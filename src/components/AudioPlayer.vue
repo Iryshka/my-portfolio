@@ -142,11 +142,10 @@ onMounted(() => {
     })
     wavesurfer.value.on('ready', () => {
       wavesurfer.value.play()
+      isPlaying.value = true
     })
     currentTrack.value = trackList.findIndex((track) => track.src === props.selectedTrack.src)
     wavesurfer.value.load(trackList[currentTrack.value].src)
-    // console.log(props.selectedTrack, 'current track is')
-    // console.log('WaveSurfer initialized successfully')
   } catch (error) {
     console.error('WaveSurfer initialization error:', error)
   }
@@ -173,8 +172,8 @@ onBeforeUnmount(() => {
   }
 
   &__image {
-    width: 130px;
-    height: 130px;
+    width: 125px;
+    height: 125px;
     border-radius: 50%;
     border: 5px solid #e210f1;
     box-sizing: border-box;
