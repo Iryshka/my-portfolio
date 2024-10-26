@@ -5,7 +5,7 @@
   ></WindowFrame>
 </template>
 <script setup>
-import WindowFrame from '@/shared/WindowFrame.vue'
+import WindowFrame from '@/components/WindowFrame.vue'
 import { defineProps, watch } from 'vue'
 
 const props = defineProps({

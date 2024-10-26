@@ -52,7 +52,7 @@
 <script setup>
 import { ref, defineProps, onBeforeUnmount, watch, onMounted } from 'vue'
 import WaveSurfer from 'wavesurfer.js'
-import WindowFrame from '@/shared/WindowFrame.vue'
+import WindowFrame from '@/components/WindowFrame.vue'
 
 const wavesurfer = ref(null)
 const isPlaying = ref(false)

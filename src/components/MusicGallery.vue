@@ -17,7 +17,7 @@
 
 <script setup>
 import { defineEmits } from 'vue'
-import WindowFrame from '@/shared/WindowFrame.vue'
+import WindowFrame from '@/components/WindowFrame.vue'
 
 const trackList = [
   {

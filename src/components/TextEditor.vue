@@ -4,7 +4,7 @@
   </WindowFrame>
 </template>
 <script setup>
-import WindowFrame from '@/shared/WindowFrame.vue'
+import WindowFrame from '@/components/WindowFrame.vue'
 </script>
 <style lang="scss" scoped>
 .text-editor {

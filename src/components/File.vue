@@ -68,7 +68,7 @@ function exitEditMode() {
   flex-direction: column;
 
   &:hover {
-    cursor: url('../../assets/images/hand-cursor3.svg'), auto;
+    cursor: url('../assets/images/hand-cursor3.svg'), auto;
   }
 
   &__title {

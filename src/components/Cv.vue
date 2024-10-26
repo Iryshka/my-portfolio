@@ -7,19 +7,19 @@
         <ul class="cv__contacts">
           <li class="cv__contacts-item">
             <a href="https://www.linkedin.com/in/irina-k-294534268/" class="cv__contacts-link">
-              <img src="../../assets/images/cv/linkedin2.svg" alt="" class="cv__contacts-img" />
+              <img src="../assets/images/cv/linkedin2.svg" alt="" class="cv__contacts-img" />
               <span class="cv__contacts-name">Linkedin</span>
             </a>
           </li>
           <li class="cv__contacts-item">
             <a href="https://github.com/Iryshka" class="cv__contacts-link">
-              <img src="../../assets/images/cv/github2.svg" alt="" class="cv__contacts-img" />
+              <img src="../assets/images/cv/github2.svg" alt="" class="cv__contacts-img" />
               <span class="cv__contacts-name">Github</span>
             </a>
           </li>
           <li class="cv__contacts-item">
             <a href="https://web.telegram.org/k/#-1580893434" class="cv__contacts-link">
-              <img src="../../assets/images/cv/telegram2.svg" alt="" class="cv__contacts-img" />
+              <img src="../assets/images/cv/telegram2.svg" alt="" class="cv__contacts-img" />
               <span class="cv__contacts-name">Telegram</span>
             </a>
           </li>
@@ -31,7 +31,7 @@
           <!--          </li>-->
           <li class="cv__contacts-item">
             <a href="/files/file-sample.docx" download="file-sample.docx" class="cv__contacts-link">
-              <img src="../../assets/images/cv/download.svg" alt="" class="cv__contacts-img" />
+              <img src="../assets/images/cv/download.svg" alt="" class="cv__contacts-img" />
               <span class="cv__contacts-name">CV</span>
             </a>
           </li>
@@ -50,7 +50,7 @@
           <h4 class="cv__work-position">Frontend Developer</h4>
           <a href="https://incollet.com/" class="cv__work-title">COLLET</a>
           <div class="cv__work-description">
-            <img src="../../assets/images/cv/bullet.svg" alt="" class="cv__work-bullet-point" />
+            <img src="../assets/images/cv/bullet.svg" alt="" class="cv__work-bullet-point" />
             <div class="cv__feature">
               <h4 class="cv__feature-title">New features development</h4>
               <p class="cv__feature-description">
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="cv__work-description">
-            <img src="../../assets/images/cv/bullet.svg" alt="" class="cv__work-bullet-point" />
+            <img src="../assets/images/cv/bullet.svg" alt="" class="cv__work-bullet-point" />
             <div class="cv__feature">
               <h4 class="cv__feature-title">Cross-browser and responsive web development</h4>
               <p class="cv__feature-description">
@@ -70,7 +70,7 @@
             </div>
           </div>
           <div class="cv__work-description">
-            <img src="../../assets/images/cv/bullet.svg" alt="" class="cv__work-bullet-point" />
+            <img src="../assets/images/cv/bullet.svg" alt="" class="cv__work-bullet-point" />
             <div class="cv__feature">
               <h4 class="cv__feature-title">Refactoring of existing code</h4>
               <p class="cv__feature-description">
@@ -86,47 +86,47 @@
         <h4 class="cv__add-info-title">Technical Skills</h4>
         <ul class="cv__list">
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/js.svg" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/js.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">JavaScript</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/react.svg" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/react.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">React</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/vue.svg" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/vue.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Vue 2 / 3</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/pinia.png" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/pinia.png" alt="" class="cv__list-img" />
             <p class="cv__list-title">Pinia</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/vite.svg" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/vite.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Vite</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/ts.svg" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/ts.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">TypeScript</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/tailwind.png" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/tailwind.png" alt="" class="cv__list-img" />
             <p class="cv__list-title">Tailwind</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/sass.svg" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/sass.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Preprocessors</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/css.svg" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/css.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">CSS-in-JS</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/git.svg" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/git.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Git</p>
           </li>
           <li class="cv__list-item">
-            <img src="../../assets/images/cv/storybook.svg" alt="" class="cv__list-img" />
+            <img src="../assets/images/cv/storybook.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Storybook</p>
           </li>
         </ul>
@@ -178,7 +178,7 @@
     margin-top: 20px;
 
     &-title {
-      cursor: url('../../assets/images/hand-cursor3.svg'), auto;
+      cursor: url('../assets/images/hand-cursor3.svg'), auto;
       color: white;
       text-decoration: none;
       font-weight: bold;
@@ -228,5 +228,5 @@
 }
 </style>
 <script setup>
-import WindowFrame from '@/shared/WindowFrame.vue'
+import WindowFrame from '@/components/WindowFrame.vue'
 </script>

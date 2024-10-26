@@ -31,9 +31,7 @@
 import { ref, computed, defineComponent } from 'vue'
 
 const isOptionDisplayed = ref(false)
-
 const node = ref(null)
-// const direction = ref('right')
 
 defineComponent({
   name: 'TheNode'

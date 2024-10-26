@@ -21,7 +21,7 @@
 
 <script setup>
 import { ref, defineEmits, reactive, onMounted } from 'vue'
-import TheNode from '@/shared/TheNode.vue'
+import TheNode from '@/components/TheNode.vue'
 
 const direction = ref(null)
 const elementList = ref(null)

@@ -1,7 +1,7 @@
 <template>
   <WindowFrame>
     <div class="bio__info">
-      <img src="@/assets/images/bio-photo.jfif" class="bio__img" alt="" />
+      <img src="../assets/images/bio-photo.jfif" class="bio__img" alt="" />
       <article class="bio__text">
         <AnimatedText><h2>Hi there!</h2> </AnimatedText>
         <AnimatedText>
@@ -16,19 +16,19 @@
     <aside class="bio__links">
       <div class="bio__linkedin">
         <a href="https://www.linkedin.com/in/irina-k-294534268/" target="_blank" class="bio__link">
-          <img class="bio__social-img" src="../../assets/images/linkedin-image.svg" alt="" />
+          <img class="bio__social-img" src="../assets/images/linkedin-image.svg" alt="" />
           <p class="bio__linkedin-p">linkedin</p>
         </a>
       </div>
       <div class="bio__github">
         <a href="https://github.com/Iryshka" target="_blank" class="bio__link">
-          <img class="bio__social-img" src="../../assets/images/github-image.svg" alt="" />
+          <img class="bio__social-img" src="../assets/images/github-image.svg" alt="" />
           <p class="bio__linkedin-p">github</p>
         </a>
       </div>
       <div class="bio__telegram">
         <a href="https://desktop.telegram.org/" target="_blank" class="bio__link">
-          <img class="bio__social-img" src="../../assets/images/telegram-image.svg" alt="" />
+          <img class="bio__social-img" src="../assets/images/telegram-image.svg" alt="" />
           <p class="bio__linkedin-p">telegram</p>
         </a>
       </div>
@@ -37,8 +37,8 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import WindowFrame from '@/shared/WindowFrame.vue'
-import AnimatedText from '@/shared/IconItem/ui/AnimatedText.vue'
+import WindowFrame from '@/components/WindowFrame.vue'
+import AnimatedText from '@/components/ui/AnimatedText.vue'
 
 const backgroundGradient = ref(`linear-gradient(
    177deg,
@@ -110,7 +110,7 @@ const backgroundGradient = ref(`linear-gradient(
   }
 
   &__link {
-    cursor: url('../../assets/images/hand-cursor3.svg'), auto;
+    cursor: url('../assets/images/hand-cursor3.svg'), auto;
     display: flex;
     gap: 10px;
     align-items: center;

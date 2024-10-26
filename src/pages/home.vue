@@ -4,5 +4,5 @@
 </template>
 
 <script setup>
-import InputComponent from '@/shared/IconItem/ui/index.vue'
+import InputComponent from '@/components/ui/index.vue'
 </script>

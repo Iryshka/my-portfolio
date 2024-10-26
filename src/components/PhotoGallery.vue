@@ -23,8 +23,8 @@
 
 <script setup>
 import { ref, defineEmits } from 'vue'
-import WindowFrame from '@/shared/WindowFrame.vue'
-import FullPhoto from '@/shared/IconItem/FullPhoto.vue'
+import WindowFrame from '@/components/WindowFrame.vue'
+import FullPhoto from '@/components/FullPhoto.vue'
 
 const fullPhotoImageIndex = ref(null)
 
