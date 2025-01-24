@@ -13,7 +13,7 @@
   border: 10px solid #e54ee2ff;
   border-bottom: 35px solid #e54ee2ff;
   background-color: #5efc8d;
-  height: 85dvh;
+  height: 88dvh;
   font-size: 20px;
 
   @include breakpoints-up(small) {

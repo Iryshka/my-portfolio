@@ -40,7 +40,7 @@
   &__content {
     position: relative;
     overflow-y: auto;
-    max-height: 80vh;
+    max-height: 85vh;
 
     @include breakpoints-up(small) {
       max-height: 90vh;
