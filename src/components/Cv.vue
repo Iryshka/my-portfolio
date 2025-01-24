@@ -65,7 +65,7 @@
             </div>
           </div>
           <div class="cv__work-description">
-            <img src="../assets/images/cv/bullet.svg" alt="" class="cv__work-bullet-point" />
+            <img src="/assets/images/cv/bullet.svg" alt="" class="cv__work-bullet-point" />
             <div class="cv__feature">
               <h4 class="cv__feature-title">Refactoring of existing code</h4>
               <p class="cv__feature-description">
@@ -81,51 +81,51 @@
         <h4 class="cv__add-info-title">Technical Skills</h4>
         <ul class="cv__list">
           <li class="cv__list-item">
-            <img src="../assets/images/cv/js.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/js.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">JavaScript</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/react.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/react.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">React</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/redux.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/redux.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Redux Toolkit</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/vue.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/vue.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Vue 3</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/pinia.png" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/pinia.png" alt="" class="cv__list-img" />
             <p class="cv__list-title">Pinia</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/nodejs.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/nodejs.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Node JS</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/vite.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/vite.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Vite</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/ts.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/ts.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">TypeScript</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/tailwind.png" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/tailwind.png" alt="" class="cv__list-img" />
             <p class="cv__list-title">Tailwind</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/sass.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/sass.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Preprocessors</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/css.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/css.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">CSS-in-JS</p>
           </li>
           <li class="cv__list-item">
-            <img src="../assets/images/cv/storybook.svg" alt="" class="cv__list-img" />
+            <img src="/assets/images/cv/storybook.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">Storybook</p>
           </li>
         </ul>
