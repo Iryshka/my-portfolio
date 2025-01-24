@@ -29,12 +29,12 @@ import FullPhoto from '@/components/FullPhoto.vue'
 const fullPhotoImageIndex = ref(null)
 
 const images = [
-  { src: '/assets/images/image1.jpg' },
-  { src: '/assets/images/image3.jpg' },
-  { src: '/assets/images/image5.jpg' },
-  { src: '/assets/images/image4.jpg' },
-  { src: '/assets/images/image2.jpg' },
-  { src: '/assets/images/image6.jpg' }
+  { src: '/my-portfolio/assets/images/image1.jpg' },
+  { src: '/my-portfolio/assets/images/image3.jpg' },
+  { src: '/my-portfolio/assets/images/image5.jpg' },
+  { src: '/my-portfolio/assets/images/image4.jpg' },
+  { src: '/my-portfolio/assets/images/image2.jpg' },
+  { src: '/my-portfolio/assets/images/image6.jpg' }
 ]
 
 const emit = defineEmits(['onImageClick'])

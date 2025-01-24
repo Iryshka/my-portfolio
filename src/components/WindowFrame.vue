@@ -28,7 +28,6 @@
   border: 5px solid #e54ee2ff;
   border-top-width: 30px;
   box-shadow: 7px 10px 0 0 rgba(35, 29, 29, 100);
-  //width: 100%;
   min-width: 320px;
   max-width: min(90vw, 660px);
   height: auto;
@@ -41,10 +40,10 @@
   &__content {
     position: relative;
     overflow-y: auto;
-    max-height: 90vh;
+    max-height: 80vh;
 
     @include breakpoints-up(small) {
-      max-height: 85vh;
+      max-height: 90vh;
     }
   }
 
