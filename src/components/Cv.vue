@@ -26,7 +26,7 @@
 
           <li class="cv__contacts-item">
             <a
-              href="/assets/file-sample.docx"
+              href="/my-portfolio/assets/file-sample.docx"
               download="file-sample.docx"
               class="cv__contacts-link"
             >
