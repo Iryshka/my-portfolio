@@ -78,20 +78,20 @@ const trackList = [
   {
     band: 'Kavinsky',
     title: 'NightCall',
-    image: 'src/assets/audio/audio-images/Kavinsky-image.png',
-    src: 'src/assets/audio/kavinsky.mp3'
+    image: '/my-portfolio/assets/audio/audio-images/Kavinsky-image.png',
+    src: '/my-portfolio/assets/audio/kavinsky.mp3'
   },
   {
     band: 'Jimin',
     title: 'Alone',
-    image: 'src/assets/audio/audio-images/daughter-image.jpg',
-    src: 'src/assets/audio/alone.mp3'
+    image: '/my-portfolio/assets/audio/audio-images/daughter-image.jpg',
+    src: '/my-portfolio/assets/audio/alone.mp3'
   },
   {
     band: 'J. Koden',
     title: 'Get lucky',
-    image: 'src/assets/audio/audio-images/getlucky-image.jpg',
-    src: 'src/assets/audio/getlucky.mp3'
+    image: '/my-portfolio/assets/audio/audio-images/getlucky-image.jpg',
+    src: '/my-portfolio/assets/audio/getlucky.mp3'
   }
 ]
 const currentTrack = ref(0)

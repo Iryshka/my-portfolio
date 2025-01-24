@@ -13,12 +13,12 @@
   border: 10px solid #e54ee2ff;
   border-bottom: 35px solid #e54ee2ff;
   background-color: #5efc8d;
-  height: 95dvh;
+  height: 85dvh;
   font-size: 20px;
 
   @include breakpoints-up(small) {
     width: 85%;
-    height: 90dvh;
+    height: 95dvh;
   }
   .date {
     position: absolute;
