@@ -25,7 +25,11 @@
           </li>
 
           <li class="cv__contacts-item">
-            <a href="/files/file-sample.docx" download="file-sample.docx" class="cv__contacts-link">
+            <a
+              href="/my-portfolio/files/file-sample.docx"
+              download="file-sample.docx"
+              class="cv__contacts-link"
+            >
               <img src="../assets/images/cv/download.svg" alt="" class="cv__contacts-img" />
               <span class="cv__contacts-name">CV</span>
             </a>
