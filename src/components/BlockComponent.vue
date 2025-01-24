@@ -7,7 +7,7 @@
   >
     <slot />
 
-    {{ blockIndex }}
+    <!--    {{ blockIndex }}-->
   </li>
 </template>
 
@@ -36,10 +36,10 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.block {
-  border: 1px solid pink;
-  opacity: 1;
-  width: 70px;
-  height: 70px;
-}
+//.block {
+//  border: 1px solid pink;
+//  opacity: 1;
+//  width: 70px;
+//  height: 70px;
+//}
 </style>

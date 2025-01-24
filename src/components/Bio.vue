@@ -8,8 +8,8 @@
           <h2>I'm Iryshka</h2>
         </AnimatedText>
         <p class="bio__desc">
-          I'm a frontend developer with a keen interest in web development. Vue JS | JavaScript
-          junkie
+          I'm a frontend developer with a keen interest in web development. React | JavaScript
+          junkie.
         </p>
       </article>
     </div>
@@ -36,15 +36,15 @@
   </WindowFrame>
 </template>
 <script setup>
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import WindowFrame from '@/components/WindowFrame.vue'
 import AnimatedText from '@/components/ui/AnimatedText.vue'
 
-const backgroundGradient = ref(`linear-gradient(
-   177deg,
-   rgba(2, 0, 36, 0.5) 0%,
-   rgba(2, 2, 6, 0.9) 75%,
-   rgba(219, 14, 208, 0.5) 100%`)
+// const backgroundGradient = ref(`linear-gradient(
+//    177deg,
+//    rgba(2, 0, 36, 0.5) 0%,
+//    rgba(2, 2, 6, 0.9) 75%,
+//    rgba(219, 14, 208, 0.5) 100%`)
 </script>
 <style scoped lang="scss">
 .bio {

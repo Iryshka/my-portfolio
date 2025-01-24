@@ -88,7 +88,7 @@ const trackList = [
     src: 'src/assets/audio/alone.mp3'
   },
   {
-    band: 'Daughter',
+    band: 'J. Koden',
     title: 'Get lucky',
     image: 'src/assets/audio/audio-images/getlucky-image.jpg',
     src: 'src/assets/audio/getlucky.mp3'
@@ -164,6 +164,7 @@ onBeforeUnmount(() => {
   justify-content: space-around;
   align-items: center;
   gap: 5px;
+  height: 170px;
   padding: 5px;
 
   @include breakpoints-up(small) {

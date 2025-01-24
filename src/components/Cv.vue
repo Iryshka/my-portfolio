@@ -23,12 +23,7 @@
               <span class="cv__contacts-name">Telegram</span>
             </a>
           </li>
-          <!--          <li class="cv__contacts-item">-->
-          <!--            <a href="mailto: iryna292@gmail.com" class="cv__contacts-link">-->
-          <!--              <img src="../../assets/images/cv/mail.svg" alt="" class="cv__contacts-img" />-->
-          <!--              <span class="cv__contacts-name">Email</span>-->
-          <!--            </a>-->
-          <!--          </li>-->
+
           <li class="cv__contacts-item">
             <a href="/files/file-sample.docx" download="file-sample.docx" class="cv__contacts-link">
               <img src="../assets/images/cv/download.svg" alt="" class="cv__contacts-img" />
@@ -40,10 +35,10 @@
         <div class="cv__experience">
           <h3 class="cv__summary">Summary</h3>
           <p class="cv__summary-description">
-            I'm a Frontend Developer with 3+ years of experience, main focus on Vue JS / Nuxt JS and
-            solid knowledge of JavaScript foundation. My work combines the development of dynamic
-            and user-friendly web applications with a strong logical approach and commitment to
-            crafting pixel-perfect designs. I’m ready to contribute my skills to projects that
+            I'm a Frontend Developer with 3+ years of experience, main focus on React and Next JS
+            and solid knowledge of JavaScript foundation. My work combines the development of
+            dynamic and user-friendly web applications with a strong logical approach and commitment
+            to crafting pixel-perfect designs. I’m ready to contribute my skills to projects that
             demand both a logical mindset and an eye for precision.
           </p>
           <h3 class="cv__work">Work experience</h3>
@@ -94,12 +89,20 @@
             <p class="cv__list-title">React</p>
           </li>
           <li class="cv__list-item">
+            <img src="../assets/images/cv/redux.svg" alt="" class="cv__list-img" />
+            <p class="cv__list-title">Redux Toolkit</p>
+          </li>
+          <li class="cv__list-item">
             <img src="../assets/images/cv/vue.svg" alt="" class="cv__list-img" />
-            <p class="cv__list-title">Vue 2 / 3</p>
+            <p class="cv__list-title">Vue 3</p>
           </li>
           <li class="cv__list-item">
             <img src="../assets/images/cv/pinia.png" alt="" class="cv__list-img" />
             <p class="cv__list-title">Pinia</p>
+          </li>
+          <li class="cv__list-item">
+            <img src="../assets/images/cv/nodejs.svg" alt="" class="cv__list-img" />
+            <p class="cv__list-title">Node JS</p>
           </li>
           <li class="cv__list-item">
             <img src="../assets/images/cv/vite.svg" alt="" class="cv__list-img" />
@@ -120,10 +123,6 @@
           <li class="cv__list-item">
             <img src="../assets/images/cv/css.svg" alt="" class="cv__list-img" />
             <p class="cv__list-title">CSS-in-JS</p>
-          </li>
-          <li class="cv__list-item">
-            <img src="../assets/images/cv/git.svg" alt="" class="cv__list-img" />
-            <p class="cv__list-title">Git</p>
           </li>
           <li class="cv__list-item">
             <img src="../assets/images/cv/storybook.svg" alt="" class="cv__list-img" />

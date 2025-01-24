@@ -21,6 +21,7 @@
 
         <Resume @dblclick="openResume" v-if="index === 0" class="resume" />
         <Draggable v-if="index === draggablePositionIndex" />
+
         <DropZone @onDropElement="dropElement" v-if="index === 27" />
         <ImageFolder @dblclick="openPhotoGallery" v-if="index === Number(imageFolderIndex)" />
         <MusicFolder @dblclick="openMusicGallery" v-if="index === Number(musicFolderIndex)" />
@@ -153,8 +154,6 @@ watch(files, (newValue, oldValue) => {
 })
 
 function findNearestBottom(currentIndex) {
-  // First find current element from grouped blockCoordinates
-  // get current top coordinate from currentElement
   const currentElement = blocksCoordinates[currentIndex]
   const currentElementTopPosition = currentElement.top
   const currentElementLeftPosition = currentElement.left
@@ -171,9 +170,6 @@ function findNearestBottom(currentIndex) {
   const sortedVerticalBlocks = verticalBlocks.sort((previous, next) => previous.top - next.top)
   console.log(sortedVerticalBlocks)
   return sortedVerticalBlocks.map(({ index }) => Number(index))
-  // const nearestBottomBlock = sortedVerticalBlocks[0]
-  // return nearestBottomBlock.index
-  // find first element with the same left and nearest top
 }
 
 function openResume() {
@@ -219,29 +215,6 @@ async function downloadDocx(url = 'https://morth.nic.in/sites/default/files/dd12
   saveAs(newBlob, `test.pdf`)
 }
 
-// async function getFile(
-//   url = 'https://file-examples.com/wp-content/storage/2017/02/file-sample_100kB.docx'
-// ) {
-//   const request = new Request(url)
-//   const response = await fetch(request)
-//   const blob = await response.blob()
-//   console.log(blob, "i'm blob")
-//   const objectURL = URL.createObjectURL(blob)
-//   const a = document.createElement('a')
-//   a.setAttribute('href', objectURL)
-//   a.setAttribute('download', `${new Date().toISOString()}.docx`)
-//   document.body.appendChild(a)
-//   a.click()
-//   document.body.removeChild(a)
-//   URL.revokeObjectURL(objectURL)
-// }
-// function downloadCV() {
-//   const link = document.createElement('a')
-//   link.href = 'https://file-examples.com/wp-content/storage/2017/02/file-sample_100kB.docx'
-//   link.download = 'MyCv.docx'
-//   link.click()
-// }
-
 function closePhotoGallery() {
   isPhotoGalleryDisplayed.value = false
 }
@@ -262,9 +235,6 @@ function closeCV() {
   isCvDisplayed.value = false
 }
 
-const closeFullPhoto = () => {
-  isFullPhotoDisplayed.value = false
-}
 function closeBio() {
   console.log('closing bio')
   isBioDisplayed.value = false
@@ -280,7 +250,6 @@ onMounted(() => {
       files[key] = value
     }
   }
-  console.log(localStorage.getItem('files'))
 })
 
 function onOption() {
@@ -291,7 +260,6 @@ function onOption() {
 
 function onBlock(index) {
   currentIndex.value = index
-  console.log(currentIndex.value)
 }
 
 function createFile() {
@@ -365,11 +333,8 @@ function getNumberOfBlocks() {
   )
 
   totalNumberOfBlocks.value = numberOfBlocksInWidth.value * numberOfBlocksInHeight.value
-  // console.log(findNearestBottom(0))
 }
 
-// const leftCoord = computed(() => `${coordinates[0]}px`)
-// const topCoord = computed(() => `${coordinates[1]}px`)
 const rowGap = computed(() => `${verticalSpaceBetweenBlocks.value}px`)
 const columnGap = computed(() => `${horizontalSpaceBetweenBlocks.value}px`)
 
@@ -401,15 +366,6 @@ $leftCoord: v-bind(leftCoord);
     height: 100%;
   }
 
-  //&-page__photo {
-  //  width: 350px;
-  //  height: 400px;
-  //  border: 6px solid deeppink;
-  //  position: absolute;
-  //  top: 50px;
-  //  left: 50px;
-  //}
-
   &-page__photo-img {
     width: 100%;
     height: 100%;
@@ -418,8 +374,6 @@ $leftCoord: v-bind(leftCoord);
 }
 
 .block {
-  //border: 1px solid pink;
-  //opacity: 1;
   width: 70px;
   height: 70px;
 }
