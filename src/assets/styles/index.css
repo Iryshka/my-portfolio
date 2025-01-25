@@ -1,5 +1,5 @@
 @import '../fonts';
 @import 'normalize.css';
 @import "variables.css";
-/*@import './_mixins.scss';*/
+
 @import 'main.css';

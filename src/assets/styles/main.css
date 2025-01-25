@@ -16,14 +16,14 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
+  width: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgba(77, 123, 255, 0.6);
 }
 
-/* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
   background:  rgba(77, 123, 255, 0.8);
 }

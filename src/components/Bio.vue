@@ -27,7 +27,7 @@
         </a>
       </div>
       <div class="bio__telegram">
-        <a href="https://desktop.telegram.org/" target="_blank" class="bio__link">
+        <a href="https://https://t.me/Iry_k" target="_blank" class="bio__link">
           <img class="bio__social-img" src="../assets/images/telegram-image.svg" alt="" />
           <p class="bio__linkedin-p">telegram</p>
         </a>
@@ -36,7 +36,6 @@
   </WindowFrame>
 </template>
 <script setup>
-// import { ref } from 'vue'
 import WindowFrame from '@/components/WindowFrame.vue'
 import AnimatedText from '@/components/ui/AnimatedText.vue'
 

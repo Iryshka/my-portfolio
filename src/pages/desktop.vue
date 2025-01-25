@@ -168,18 +168,15 @@ function findNearestBottom(currentIndex) {
     (item) => item.left === currentElementLeftPosition && item.top > currentElementTopPosition
   )
   const sortedVerticalBlocks = verticalBlocks.sort((previous, next) => previous.top - next.top)
-  console.log(sortedVerticalBlocks)
   return sortedVerticalBlocks.map(({ index }) => Number(index))
 }
 
 function openResume() {
   isBioDisplayed.value = true
-  console.log("i'm clicked twice")
 }
 
 function openPhotoGallery() {
   isPhotoGalleryDisplayed.value = true
-  console.log('photogallery clicked')
 }
 
 function openAudioPlayer(track) {
@@ -199,7 +196,6 @@ function openTextEditor(index) {
 }
 
 function openFullPhoto(imageSrc) {
-  console.log('Opening full photo')
   fullPhotoSrc.value = imageSrc
   isFullPhotoDisplayed.value = true
 }
@@ -236,7 +232,6 @@ function closeCV() {
 }
 
 function closeBio() {
-  console.log('closing bio')
   isBioDisplayed.value = false
 }
 
@@ -263,7 +258,6 @@ function onBlock(index) {
 }
 
 function createFile() {
-  console.log('create file', currentIndex.value)
   closeSelect()
   fileCreated++
   files[currentIndex.value] = {

@@ -106,19 +106,11 @@ function getNumberOfLongestNestedList(options) {
 }
 
 console.log(props.coordinates[0], props.coordinates[1])
-
-// const x = computed(() => props.coordinates[0] + 'px')
-// const y = computed(() => props.coordinates[1] + 'px')
 </script>
 
 <style scoped lang="scss">
-//$x: v-bind(x);
-//$y: v-bind(y);
-
 .click-select {
   position: fixed;
-  //top: $y;
-  //left: $x;
   z-index: 2;
 
   border: 5px solid rgb(229, 78, 226);

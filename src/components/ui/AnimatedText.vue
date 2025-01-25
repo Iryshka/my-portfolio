@@ -7,18 +7,16 @@
 <style scoped lang="scss">
 .typewriter {
   font-family: monospace;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: 0.15em solid orange; /* The typwriter cursor */
+  overflow: hidden;
+  border-right: 0.15em solid orange;
   line-height: 1.2;
-  white-space: nowrap; /* Keeps the content on a single line */
-  /* Gives that scrolling effect as the typing happens */
-  letter-spacing: 0.25em; /* Adjust as needed */
+  white-space: nowrap;
+  letter-spacing: 0.25em;
   animation:
     typing 3.5s steps(30, end),
     blink-caret 0.5s step-end infinite;
 }
 
-/* The typing effect */
 @keyframes typing {
   from {
     width: 0;
@@ -28,7 +26,6 @@
   }
 }
 
-/* The typewriter cursor effect */
 @keyframes blink-caret {
   from,
   to {

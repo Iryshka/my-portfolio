@@ -24,7 +24,6 @@
 <script setup>
 import { ref, defineEmits } from 'vue'
 import WindowFrame from '@/components/WindowFrame.vue'
-import FullPhoto from '@/components/FullPhoto.vue'
 
 const fullPhotoImageIndex = ref(null)
 
@@ -86,9 +85,5 @@ function closeFullPhoto() {
     transition: transform 1.1s;
     cursor: url('../assets/images/hand-cursor3.svg'), auto;
   }
-
-  //&:hover {
-  //  cursor: url('../assets/images/hand-cursor3.svg'), auto;
-  //}
 }
 </style>

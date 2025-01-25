@@ -59,10 +59,7 @@ const parsedOptions = computed(() => props.options ?? [])
 // const emit = defineEmits(['action'])
 
 function onNode() {
-  console.log('onNode', props)
   if (props.action) {
-    // emit('action')
-    console.log('click on action')
     props.action()
   } else {
     isOptionDisplayed.value = !isOptionDisplayed.value
@@ -109,7 +106,6 @@ function onNode() {
   }
 
   &__img {
-    //display: block;
     width: 20px;
     height: 20px;
   }

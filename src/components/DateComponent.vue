@@ -1,20 +1,27 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { format } from 'date-fns'
 
 const date = ref('')
 const time = ref('')
+const now = ref(new Date())
 
-function getDate() {
-  date.value = format(new Date(), 'MMMM d, yyyy')
-}
-function getTime() {
-  time.value = format(new Date(), 'kk:mm')
+function updateDateTime() {
+  date.value = format(now.value, 'MMMM d, yyyy')
+  time.value = format(now.value, 'kk:mm')
 }
 
 onMounted(() => {
-  getTime()
-  getDate()
+  updateDateTime()
+
+  const interval = setInterval(() => {
+    now.value = new Date()
+    updateDateTime()
+  }, 1000)
+
+  onUnmounted(() => {
+    clearInterval(interval)
+  })
 })
 </script>
 

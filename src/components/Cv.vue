@@ -18,7 +18,7 @@
             </a>
           </li>
           <li class="cv__contacts-item">
-            <a href="https://web.telegram.org/k/#-1580893434" class="cv__contacts-link">
+            <a href="https://t.me/Iry_k" class="cv__contacts-link">
               <img src="../assets/images/cv/telegram2.svg" alt="" class="cv__contacts-img" />
               <span class="cv__contacts-name">Telegram</span>
             </a>
